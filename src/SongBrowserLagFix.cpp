@@ -35,10 +35,11 @@ class $modify(BIMusicDownloadManager, MusicDownloadManager) {
         MusicDownloadManager::limitDownloadedSongs();
     }
 
-    void downloadSongFinished(int songID) {
+    void onDownloadSongCompleted(CCHttpClient* client, CCHttpResponse* response) {
+        auto songID = atoi(response->getHttpRequest()->getTag());
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs[songID] = true;
 
-        MusicDownloadManager::downloadSongFinished(songID);
+        MusicDownloadManager::onDownloadSongCompleted(client, response);
     }
 };
 
