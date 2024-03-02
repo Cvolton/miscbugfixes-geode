@@ -59,7 +59,7 @@ class $modify(BISBLLevelInfoLayer, LevelInfoLayer) {
 
 class $modify(CustomSongWidget) {
     void updateSongInfo() {
-        if(s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
+        if(m_songInfoObject && s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
 
         CustomSongWidget::updateSongInfo();
     }
