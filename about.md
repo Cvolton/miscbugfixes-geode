@@ -3,8 +3,8 @@ Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
 
 Fixed bugs:
 - Save and Play out of memory crash
+  - Reduced the likelihood at least, may still happen
 - Copy to Clipboard not working (Android only)
-- Saved Songs lag
+- Saved Songs page switching lag
 - Profiles showing old/broken usernames
-
-All bugfixes can be disabled in the mod settings.
+- A crash caused by refreshing and liking comments at the same time
