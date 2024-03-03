@@ -19,6 +19,8 @@ $execute {
             log::error("Failed to patch GManager::save call in EditorPauseLayer::saveLevel");
         }
     #endif
+    //TODO: mac
+    //TODO: android
 
     if(s_disableSavePatch) (void)s_disableSavePatch->disable();
 }
