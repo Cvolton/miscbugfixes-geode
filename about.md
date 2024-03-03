@@ -11,3 +11,4 @@ Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
 - <cj>Profiles</c> showing <cr>old/broken</c> usernames
 - A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at the same time
 - <cr>"12 days left"</c> timer bug
+- <cj>"My Lists" Search</c> showing <cr>incorrect usernames</c>
