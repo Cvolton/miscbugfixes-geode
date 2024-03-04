@@ -10,12 +10,5 @@
 	"name": "Misc Bugfixes",
 	"developer": "Cvolton",
 	"description": "Fixes various issues with the game",
-	"settings": {
-        "enable-compact-lists": {
-            "name": "Enable compact lists",
-            "description": "Whether the mod should do anything at all",
-            "type": "bool",
-            "default": true
-        }
-	}
+    "tags": ["bugfix"]
 }
