@@ -1,28 +1,47 @@
 #include <Geode/Geode.hpp>
+#include "_Utils.hpp"
 
 using namespace geode::prelude;
 
 void nopWindows(size_t address, const char* funcName) {
-    if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + address), {0x90, 0x90, 0x90, 0x90, 0x90})) {
-        log::info("Timer fix: Patched {}", funcName);
+    auto result = patch(
+        address,
+        {0x25, 0xff, 0xff, 0x0f, 0x00},
+        {0x90, 0x90, 0x90, 0x90, 0x90}
+    );
+
+    if(result.isErr()) {
+        log::error("Timer fix: Failed to patch {} - {}", funcName, result.unwrapErr());
     } else {
-        log::error("Timer fix: Failed to patch {}", funcName);
+        log::info("Timer fix: Patched {}", funcName);
     }
 }
 
 void nopMac(size_t address, const char* funcName) {
-    if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + address), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90})) {
-        log::info("Timer fix: Patched {}", funcName);
+    auto result = patch(
+        address,
+        {0x81, 0xe1, 0xff, 0xff, 0x0f, 0x00},
+        {0x90, 0x90, 0x90, 0x90, 0x90, 0x90}
+    );
+
+    if(result.isErr()) {
+        log::error("Timer fix: Failed to patch {} - {}", funcName, result.unwrapErr());
     } else {
-        log::error("Timer fix: Failed to patch {}", funcName);
+        log::info("Timer fix: Patched {}", funcName);
     }
 }
 
 void nopMac2(size_t address, const char* funcName) {
-    if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + address), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90})) {
-        log::info("Timer fix: Patched {}", funcName);
+    auto result = patch(
+        address,
+        {0x41, 0x81, 0xe6, 0xff, 0xff, 0x0f, 0x00},
+        {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90}
+    );
+
+    if(result.isErr()) {
+        log::error("Timer fix: Failed to patch {} - {}", funcName, result.unwrapErr());
     } else {
-        log::error("Timer fix: Failed to patch {}", funcName);
+        log::info("Timer fix: Patched {}", funcName);
     }
 }
 
@@ -87,7 +106,7 @@ $execute {
         nopMac(0x52623, "FUN_1000520b0");
         nopMac(0x5366b, "FUN_100053640");
         nopMac(0x54801, "FUN_1000547c0");
-        nopMac(0x70d68, "FUN_100070d40");
+        nopMac(0x70d75, "FUN_100070d40");
         nopMac(0x73151, "GameStatsManager::storeChallengeTime");
         nopMac(0x887e8, "FUN_1000887c0");
         nopMac(0xa5f7c, "PlayLayer::init");
