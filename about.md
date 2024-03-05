@@ -9,7 +9,9 @@ Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
 - <cj>Copy to Clipboard</c> not working (Android only)
 - <cj>Saved Songs</c> page switching <cr>lag</c>
 - <cj>Profiles</c> showing <cr>old/broken</c> usernames
-- A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at the same time
-- <cr>"12 days left"</c> timer bug
 - <cj>"My Lists" Search</c> showing <cr>incorrect usernames</c>
 - <cj>Basement monster</c> <cr>softlock</c>
+- A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at the same time
+- <cr>"12 days left"</c> timer bug
+
+For a technical breakdown of the fixed bugs see [readme.md](https://github.com/Cvolton/miscbugfixes-geode/blob/master/README.md)

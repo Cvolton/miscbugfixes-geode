@@ -57,7 +57,15 @@ If you unlock the 3 keys in the basement and then save and close the game during
 
 The fix checks for this specific condition and offers you to free the monster.
 
-### User IDs not saved for saved levels
+### Bugs not listed in about.md
+These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
+
+#### User IDs not saved for saved levels
 This is not a bug in itself rather than a RobTop decision. However it has the side effect of possibly showing "-" as the username for the profile if you open it from a saved level cell.
 
 The fix simply reverts this change and makes the user ID be saved for all saved levels.
+
+#### Geode Updater Stuck
+The current Geode auto updater remember when it last checked for updates and only asks the server if any updates have come out since that time. It, however, does not verify whether the update check was succesful. This can, in some rare circumstances, cause people to skip a release.
+
+The fix forces Geode to check once again if the installed version is older than what was latest as of the last Geode update.
