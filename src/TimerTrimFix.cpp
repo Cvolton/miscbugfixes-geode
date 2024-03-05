@@ -81,7 +81,7 @@ $execute {
         nopWindows(0x2eaf02, "PlayLayer::pauseGame");
         nopWindows(0x2eb25b, "PlayLayer::resume");
         nopWindows(0x2f773a, "FUN_006f76d0");
-    #elif defined(GEODE_IS_MAC)
+    #elif defined(GEODE_IS_MACOS)
         static_assert(GEODE_COMP_GD_VERSION == 22000, "Wrong GD version detected");
         nopMac(0xcc88, "EditorUI::init");
         nopMac(0x52623, "FUN_1000520b0");
