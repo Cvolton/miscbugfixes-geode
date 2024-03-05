@@ -1,12 +1,13 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include <Geode/modify/LevelInfoLayer.hpp>
+#include <Geode/modify/CustomSongCell.hpp>
 #include <Geode/modify/CustomSongWidget.hpp>
+#include <Geode/modify/GJSongBrowser.hpp>
 
 using namespace geode::prelude;
 
 static inline std::unordered_map<int, bool> s_downloadedSongs;
-
 class $modify(BIMusicDownloadManager, MusicDownloadManager) {
     bool isSongDownloaded(int songID) {
         if(s_downloadedSongs.contains(songID)) {
@@ -41,6 +42,23 @@ class $modify(BIMusicDownloadManager, MusicDownloadManager) {
 
         MusicDownloadManager::onDownloadSongCompleted(client, response);
     }
+
+    #ifndef GEODE_IS_WINDOWS
+    // this function is inlined on windows
+    void deleteSong(int songID) {
+        MusicDownloadManager::deleteSong(songID);
+
+        if(s_downloadedSongs.contains(songID)) s_downloadedSongs.erase(songID);
+    }
+    #endif
+};
+
+class $modify(GJSongBrowser) {
+    void FLAlert_Clicked(FLAlertLayer* alert, bool btn2) {
+        GJSongBrowser::FLAlert_Clicked(alert, btn2);
+
+        s_downloadedSongs.clear();
+    }
 };
 
 class $modify(BISBLLevelInfoLayer, LevelInfoLayer) {
@@ -62,5 +80,19 @@ class $modify(CustomSongWidget) {
         if(m_songInfoObject && s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
 
         CustomSongWidget::updateSongInfo();
+    }
+
+    void deleteSong() {
+        CustomSongWidget::deleteSong();
+
+        if(s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
+    }
+};
+
+class $modify(CustomSongCell) {
+    void onDelete(CCObject* sender) {
+        CustomSongCell::onDelete(sender);
+
+        if(s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
     }
 };
