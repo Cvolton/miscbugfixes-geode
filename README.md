@@ -56,3 +56,8 @@ The fix properly implements logic to resolve account IDs to usernames for list s
 If you unlock the 3 keys in the basement and then save and close the game during the dialog with the monster, the result is that you've unlocked all 3 keys but the monster is still unfreed.
 
 The fix checks for this specific condition and offers you to free the monster.
+
+### User IDs not saved for saved levels
+This is not a bug in itself rather than a RobTop decision. However it has the side effect of possibly showing "-" as the username for the profile if you open it from a saved level cell.
+
+The fix simply reverts this change and makes the user ID be saved for all saved levels.
