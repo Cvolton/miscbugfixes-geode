@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/modify/GJGameLoadingLayer.hpp>
+#include <Geode/modify/GameManager.hpp>
 
 using namespace geode::prelude;
 
@@ -34,6 +35,84 @@ class $modify(EditorPauseLayer) {
         
         EditorPauseLayer::onSaveAndPlay(sender);
         if(s_disableSavePatch) (void)s_disableSavePatch->disable();
+    }
+
+    void onSaveAndExit(CCObject* sender) {
+        if(s_disableSavePatch) {
+            (void)s_disableSavePatch->enable();
+            s_saveLater = true;
+        }
+
+        EditorPauseLayer::onSaveAndExit(sender);
+        if(s_disableSavePatch) (void)s_disableSavePatch->disable();
+    }
+};
+
+class SaveGameLayer : public CCLayer {
+public:
+    GJGameLevel* m_level = nullptr;
+
+    static CCScene* scene(GJGameLevel* level) {
+        auto scene = CCScene::create();
+        auto layer = SaveGameLayer::create(level);
+        if(layer) {
+            scene->addChild(layer);
+            return scene;
+        }
+        return nullptr;
+    }
+
+    static SaveGameLayer* create(GJGameLevel* level) {
+        auto ret = new SaveGameLayer();
+        if(ret && ret->init(level)) {
+            ret->autorelease();
+            return ret;
+        }
+        CC_SAFE_DELETE(ret);
+        return nullptr;
+    }
+
+    bool init(GJGameLevel* level) {
+        if(!CCLayer::init()) return false;
+
+        m_level = level;
+        m_level->retain();
+
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+        auto title = CCLabelBMFont::create("Saving...", "bigFont.fnt");
+        title->setPosition({ 0, 50 });
+        title->setAnchorPoint({1,0});
+        title->setPosition({winSize.width - 20, 20});
+        addChild(title);
+
+        return true;
+    }
+
+    void onEnterTransitionDidFinish() {
+        CCLayer::onEnterTransitionDidFinish();
+        Loader::get()->queueInMainThread([this] {
+            LocalLevelManager::sharedState()->save();
+            s_saveLater = false;
+            Loader::get()->queueInMainThread([this] {
+                GameManager::sharedState()->returnToLastScene(m_level);
+                m_level->release();
+            });
+        });
+    }
+};
+
+class $modify(GameManager) {
+    void returnToLastScene(GJGameLevel* level) {
+        if(s_saveLater) {
+            auto scene = SaveGameLayer::scene(level);
+            if(scene) {
+                CCDirector::sharedDirector()->replaceScene(scene);
+                return;
+            }
+        }
+
+        GameManager::returnToLastScene(level);
     }
 };
 
