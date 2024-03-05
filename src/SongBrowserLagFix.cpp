@@ -83,16 +83,19 @@ class $modify(CustomSongWidget) {
     }
 
     void deleteSong() {
+	auto id = m_songInfoObject ? m_songInfoObject->m_songID : 0;
+
         CustomSongWidget::deleteSong();
 
-        if(s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
+        if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
     }
 };
 
 class $modify(CustomSongCell) {
     void onDelete(CCObject* sender) {
+	auto id = m_songInfoObject ? m_songInfoObject->m_songID : 0;
         CustomSongCell::onDelete(sender);
 
-        if(s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
+        if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
     }
 };
