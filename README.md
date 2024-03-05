@@ -47,8 +47,6 @@ This is proven by Android behavior, where this trim does not happen.
 
 The issue however still affects Windows, macOS and iOS. The fix simply removes the AND operation.
 
-Note: This mod does not currently implement the fix on macOS, despite it being a supported platform for the other bugfixes.
-
 ### <cj>"My Lists" Search</c> showing <cr>incorrect usernames</c>
 When loading "My Lists", the account ID is treated as a user ID while displaying the header text. Since there is usually no user cached for these IDs, this usually results in the header simply saying the default "Online Lists". However, occassionally, you can find a match and this results in the header saying a completely incorrect username. The mod BetterInfo significantly accelerates this bug, as it has its own additional logic for resolving usernames from user IDs.
 

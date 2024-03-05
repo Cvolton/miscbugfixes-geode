@@ -10,6 +10,22 @@ void nopWindows(size_t address, const char* funcName) {
     }
 }
 
+void nopMac(size_t address, const char* funcName) {
+    if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + address), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90})) {
+        log::info("Timer fix: Patched {}", funcName);
+    } else {
+        log::error("Timer fix: Failed to patch {}", funcName);
+    }
+}
+
+void nopMac2(size_t address, const char* funcName) {
+    if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + address), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90})) {
+        log::info("Timer fix: Patched {}", funcName);
+    } else {
+        log::error("Timer fix: Failed to patch {}", funcName);
+    }
+}
+
 $execute {
     // This just nops out the AND that cuts the timestamp to the bottom 20 bits
     // so that the timer doesn't reset after 1048576 seconds
@@ -65,6 +81,63 @@ $execute {
         nopWindows(0x2eaf02, "PlayLayer::pauseGame");
         nopWindows(0x2eb25b, "PlayLayer::resume");
         nopWindows(0x2f773a, "FUN_006f76d0");
+    #elif defined(GEODE_IS_MAC)
+        static_assert(GEODE_COMP_GD_VERSION == 22000, "Wrong GD version detected");
+        nopMac(0xcc88, "EditorUI::init");
+        nopMac(0x52623, "FUN_1000520b0");
+        nopMac(0x5366b, "FUN_100053640");
+        nopMac(0x54801, "FUN_1000547c0");
+        nopMac(0x70d68, "FUN_100070d40");
+        nopMac(0x73151, "GameStatsManager::storeChallengeTime");
+        nopMac(0x887e8, "FUN_1000887c0");
+        nopMac(0xa5f7c, "PlayLayer::init");
+        nopMac(0xaddea, "PlayLayer::levelComplete");
+        nopMac(0xb4909, "PlayLayer::destroyPlayer");
+        nopMac(0xb534f, "FUN_1000b5310");
+        nopMac(0xb880b, "PlayLayer::pauseGame");
+        nopMac(0xb8b6c, "PlayLayer::resume");
+        nopMac(0xd98bc, "LevelEditorLayer::updateEditor");
+        nopMac(0x1f949e, "RewardsPage::updateTimers");
+        nopMac2(0x210086, "DailyLevelPage::init");
+        nopMac(0x21075c, "DailyLevelPage::updateTimers");
+        nopMac(0x21142d, "FUN_100211410");
+        nopMac(0x2450f8, "FUN_1002450d0 (patch 1)");
+        nopMac(0x245163, "FUN_1002450d0 (patch 2)");
+        nopMac(0x245724, "FUN_100245700");
+        nopMac(0x245817, "FUN_100245780");
+        nopMac(0x2479d5, "FUN_100247920");
+        nopMac(0x247b39, "FUN_100247a30");
+        nopMac(0x247c74, "FUN_100247c50");
+        nopMac(0x247ce1, "FUN_100247cc0");
+        nopMac(0x35da8d, "FUN_10035da70");
+        nopMac(0x35db0d, "FUN_10035daf0");
+        nopMac(0x35db4d, "FUN_10035daf0");
+        nopMac(0x35dc7f, "FUN_10035dc60");
+        nopMac(0x35e082, "GameManager::likeFacebook");
+        nopMac(0x35e0f2, "GameManager::followTwitter");
+        nopMac(0x35e162, "GameManager::subYouTube");
+        nopMac(0x35e1d2, "GameManager::followTwitch");
+        nopMac(0x35e242, "GameManager::joinDiscord");
+        nopMac(0x35e2b2, "GameManager::joinReddit");
+        nopMac(0x3684c3, "GameManager::applicationWillEnterForeground");
+        nopMac(0x37b406, "ChallengesPage::init");
+        nopMac(0x37b68a, "ChallengesPage::updateTimers");
+        nopMac(0x384bbc, "FUN_100384b40");
+        nopMac(0x384fcf, "FUN_100384f50");
+        nopMac(0x3a61fd, "FUN_1003a61d0 (DialogLayer)");
+        nopMac(0x3a68b2, "DialogLayer::animateIn");
+        nopMac(0x3e0ebf, "PlayerObject::updateJump");
+        nopMac(0x3e4041, "FUN_1003e3fb0");
+        nopMac(0x3e4273, "FUN_1003e4080");
+        nopMac(0x46ffdc, "FUN_10046fe60");
+        nopMac(0x509fdc, "GameLevelManager::makeTimeStamp");
+        nopMac(0x50a27f, "GameLevelManager::isTimeValid");
+        nopMac(0x50a7bf, "GameLevelManager::getTimeLeft");
+        nopMac(0x526ffc, "GameLevelManager::storeDailyLevelState (patch 1)");
+        nopMac(0x52704a, "GameLevelManager::storeDailyLevelState (patch 2)");
+        nopMac(0x527095, "GameLevelManager::storeDailyLevelState (patch 3)");
+        nopMac(0x61d386, "GJMultiplayerManager::onJoinLobbyCompleted");
+        nopMac(0x61fc09, "AppDelegate::trySaveGame (patch 1)");
+        nopMac(0x61fc75, "AppDelegate::trySaveGame (patch 1)");
     #endif
-    //TODO: mac
 }
