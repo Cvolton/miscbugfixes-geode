@@ -2,6 +2,7 @@
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/modify/GJGameLoadingLayer.hpp>
 #include <Geode/modify/GameManager.hpp>
+#include "_Utils.hpp"
 
 using namespace geode::prelude;
 
@@ -13,36 +14,41 @@ $execute {
     // so we can call it ourselves later when there's less allocated memory
     #ifdef GEODE_IS_WINDOWS
         static_assert(GEODE_COMP_GD_VERSION == 22040, "Wrong GD version detected");
-        //if(!Mod::get()->patch(reinterpret_cast<void*>(base::get() + 0xa2c51), {0x90, 0x90, 0x90, 0x90, 0x90})) {
-        if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + 0xa2c20), {0xeb, 0x34})) {
-            s_disableSavePatch = patch.value();
-        } else {
-            log::error("Failed to patch GManager::save call in EditorPauseLayer::saveLevel");
-        }
+        auto result = patch(
+            0xa2c20,
+            {0x75, 0x34},
+            {0xeb, 0x34}
+        );
     #elif defined(GEODE_IS_MACOS)
         static_assert(GEODE_COMP_GD_VERSION == 22000, "Wrong GD version detected");
-        if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + 0x2729ce), {0xf2, 0x48, 0x90, 0x48, 0x90})) {
-            s_disableSavePatch = patch.value();
-        } else {
-            log::error("Failed to patch GManager::save call in EditorPauseLayer::saveLevel");
-        }
+        auto result = patch(
+            0x2729ce,
+            {0xe8, 0x7d, 0x57, 0x21, 0x00},
+            {0xf2, 0x48, 0x90, 0x48, 0x90}
+        );
     #elif defined(GEODE_IS_ANDROID32)
         static_assert(GEODE_COMP_GD_VERSION == 22050, "Wrong GD version detected");
-        if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + 0x3E9020), {0x00, 0xBF, 0x00, 0xBF})) {
-            s_disableSavePatch = patch.value();
-        } else {
-            log::error("Failed to patch GManager::save call in EditorPauseLayer::saveLevel");
-        }
+        auto result = patch(
+            0x3E9020,
+            {0xfa, 0xf6, 0xa6, 0xfc},
+            {0x00, 0xBF, 0x00, 0xBF}
+        );
     #elif defined(GEODE_IS_ANDROID64)
         static_assert(GEODE_COMP_GD_VERSION == 22050, "Wrong GD version detected");
-        if(auto patch = Mod::get()->patch(reinterpret_cast<void*>(base::get() + 0x765FE8), {0x1F, 0x20, 0x03, 0xD5})) {
-            s_disableSavePatch = patch.value();
-        } else {
-            log::error("Failed to patch GManager::save call in EditorPauseLayer::saveLevel");
-        }
+        auto result = patch(
+            0x765FE8,
+            {0xB2, 0x35, 0xF8, 0x97},
+            {0x1F, 0x20, 0x03, 0xD5}
+        );
     #else
         static_assert(false, "Unsupported platform");
     #endif
+
+    if(result.isOk()) {
+        s_disableSavePatch = result.value();
+    } else {
+        log::error("Failed to patch GManager::save call in EditorPauseLayer::saveLevel: {}", result.err());
+    }
 
     if(s_disableSavePatch) (void)s_disableSavePatch->disable();
 }
