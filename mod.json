@@ -10,5 +10,13 @@
 	"name": "Misc Bugfixes",
 	"developer": "Cvolton",
 	"description": "Fixes various issues with the game",
-    "tags": ["bugfix"]
+    "tags": ["bugfix"],
+	"settings": {
+		"skip-4gb-patch-check": {
+            "name": "Skip 4GB Patch check",
+            "description": "Skips the 4GB Patch check on startup",
+            "type": "bool",
+            "default": false
+        }
+	}
 }
