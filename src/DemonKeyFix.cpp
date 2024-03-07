@@ -13,12 +13,13 @@ class $modify(MenuLayer) {
 
         auto total = GameStatsManager::sharedState()->getTotalCollectedCurrency();
         auto old = GameStatsManager::sharedState()->getStat("22");
+        auto diff = total - old;
 
         auto differences = Mod::get()->getSavedValue<matjson::Array>("differences");
-        differences.push_back(total - old);
+        if(diff != 0) differences.push_back(diff);
         Mod::get()->setSavedValue("differences", differences);
 
-        log::info("Adjusted collected orbs by: {} ({} -> {})", total - old, old, total);
+        log::info("Adjusted collected orbs by: {} ({} -> {})", diff, old, total);
         
         GameStatsManager::sharedState()->setStat("22", total);
 
