@@ -100,9 +100,9 @@ class $modify(MenuLayer) {
         if(Mod::get()->getSettingValue<bool>("skip-4gb-patch-check")) return true;
 
         std::thread([this]() {
-            log::info("Checking for 4GB patch...");
+            log::debug("Checking for 4GB patch...");
             if(is4GBPatchEnabled()) {
-                log::info("4GB patch is enabled.");
+                log::debug("4GB patch is enabled.");
             } else {
                 Loader::get()->queueInMainThread([this]() {
                     auto enablePopup = createQuickPopup(

@@ -13,7 +13,7 @@ void nopWindows(size_t address, const char* funcName) {
     if(result.isErr()) {
         log::error("Timer fix: Failed to patch {} - {}", funcName, result.unwrapErr());
     } else {
-        log::info("Timer fix: Patched {}", funcName);
+        log::debug("Timer fix: Patched {}", funcName);
     }
 }
 
@@ -27,7 +27,7 @@ void nopMac(size_t address, const char* funcName) {
     if(result.isErr()) {
         log::error("Timer fix: Failed to patch {} - {}", funcName, result.unwrapErr());
     } else {
-        log::info("Timer fix: Patched {}", funcName);
+        log::debug("Timer fix: Patched {}", funcName);
     }
 }
 
@@ -41,7 +41,7 @@ void nopMac2(size_t address, const char* funcName) {
     if(result.isErr()) {
         log::error("Timer fix: Failed to patch {} - {}", funcName, result.unwrapErr());
     } else {
-        log::info("Timer fix: Patched {}", funcName);
+        log::debug("Timer fix: Patched {}", funcName);
     }
 }
 
