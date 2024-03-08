@@ -16,6 +16,8 @@ The end result is that if you hit the bug, you get the correct amount of Keys on
 
 Note that it seems that Rob is already somewhat doing this as part of the game's anticheat - the vanilla game resets the "Total Orbs Collected" (GS_22) stat to the real value (GSM::getTotalCollectedCurrency), but only if GS_22 > GSM::getTotalCollectedCurrency.
 
+Also the fixed value persists even after uninstalling the mod, however the differences are saved in the mod's saved.json (if any are applied), so you can loop through the array there and substract all of the numbers from GS_22 to restore the original value.
+
 ### <cj>Copy to Clipboard</c> not working (Android only)
 This is simply an unimplemented feature on Android. The fix adds it to the game.
 
@@ -56,6 +58,11 @@ The fix properly implements logic to resolve account IDs to usernames for list s
 If you unlock the 3 keys in the basement and then save and close the game during the dialog with the monster, the result is that you've unlocked all 3 keys but the monster is still unfreed.
 
 The fix checks for this specific condition and offers you to free the monster.
+
+### "4 GB Patch"
+32-bit Windows applications require the "Large Address Aware" flag to be enabled to be able to be able to use more than 2 GB RAM. This is disabled by default in most compilers, including MSVC, which RobTop is using. Enabling this flag is a single-byte patch of the exe and doing this raises the limit to 4 GB, which is the absolute technical maximum 32-bit applications can use in general.
+
+The fix edits GeometryDash.exe to enable this flag. This edit persists even after the mod is uninstalled but a backup is available in the GD path, should the user wish to restore the original executable.
 
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
