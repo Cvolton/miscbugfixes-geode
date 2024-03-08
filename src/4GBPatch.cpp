@@ -41,10 +41,14 @@ void showFailure() {
 void showSuccess() {
     auto popup = createQuickPopup(
         "Misc Bugfixes",
-        "4GB Patch enabled! Restart your game to enjoy its benefits!",
-        "OK",
-        nullptr,
-        nullptr,
+        "<cy>4GB Patch</c> <cg>enabled</c>!\n<cj>Restart</c> your game to enjoy its benefits!",
+        "Not Now",
+        "Restart",
+        [](auto alert, bool btn2) {
+            if(btn2) {
+                utils::game::restart();
+            }
+        },
         false
     );
     popup->show();
@@ -105,9 +109,10 @@ class $modify(MenuLayer) {
                 log::debug("4GB patch is enabled.");
             } else {
                 Loader::get()->queueInMainThread([this]() {
+                    auto winSize = CCDirector::sharedDirector()->getWinSize();
                     auto enablePopup = createQuickPopup(
                         "Misc Bugfixes",
-                        "<cy>4GB Patch</c> is <cr>disabled</c>! <cg>Enable</c> it?\nThis <cj>fixes</c> a significant amount of <co>crashes</c>!\n\n(Note: This modifies GeometryDash.exe,\na backup will be made.)",
+                        "<cy>4GB Patch</c> is <cr>disabled</c>! <cg>Enable</c> it?\nThis <cj>fixes</c> a significant amount of <co>crashes</c>!\n\n",
                         "No",
                         "Yes",
                         [this](auto alert, bool btn2) {
@@ -115,7 +120,7 @@ class $modify(MenuLayer) {
                                 log::info("User chose not to enable 4GB patch.");
                                 auto dontEnablePopup = createQuickPopup(
                                     "Misc Bugfixes",
-                                    "You can enable the 4GB patch later in the settings menu.",
+                                    "You can enable the 4GB patch later in the mod settings.",
                                     "OK",
                                     nullptr,
                                     nullptr,
@@ -131,6 +136,14 @@ class $modify(MenuLayer) {
                         },
                         false
                     );
+                    
+                    auto bottomText = CCLabelBMFont::create("(This modifies GeometryDash.exe)", "chatFont.fnt");
+                    bottomText->setScale(.6f);
+                    bottomText->setZOrder(5);
+                    bottomText->setPosition({winSize.width / 2, winSize.height / 2 - 23});
+                    bottomText->setID("bottom-text"_spr);
+
+                    enablePopup->m_mainLayer->addChild(bottomText);
                     enablePopup->m_scene = this;
                     enablePopup->show();
                 });
