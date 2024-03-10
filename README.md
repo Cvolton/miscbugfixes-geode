@@ -64,6 +64,17 @@ The fix checks for this specific condition and offers you to free the monster.
 
 The fix edits GeometryDash.exe to enable this flag. This edit persists even after the mod is uninstalled but a backup is available in the GD path, should the user wish to restore the original executable.
 
+### CCMenuItem::activate crash
+When you click a button, the game attempts to run code after its callback has been called. If the button callback removes the button (for example while closing a dialog), this can result in a crash, since it would already be removed and deallocated from memory when the post-callback code is called. This post-callback code is related to CCScriptManager, which can be used to attach scripts to buttons. Vanilla Geometry Dash never does this.
+
+There are 2 possible fixes for this issue:
+- Remove the CCScriptManager call, only making the button directly run the code it's meant to.
+- Retain the button and release it after all calls have been made
+
+Misc Bugfixes opts to choose the second option in case a mod desires to utilize the script feature of cocos for anything.
+
+See also HJfod's Twitter for an alternative explanation: https://twitter.com/HJfod/status/1760076909663158588
+
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
 
