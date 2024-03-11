@@ -24,7 +24,7 @@ $execute {
         auto result = patch(
             0x2729ce,
             {0xe8, 0x7d, 0x57, 0x21, 0x00},
-            {0xf2, 0x48, 0x90, 0x48, 0x90}
+            {0x90, 0x90, 0x90, 0x90, 0x90}
         );
     #elif defined(GEODE_IS_ANDROID32)
         static_assert(GEODE_COMP_GD_VERSION == 22050, "Wrong GD version detected");
