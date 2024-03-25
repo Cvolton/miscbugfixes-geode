@@ -8,6 +8,30 @@ using namespace geode::prelude;
 
 static bool s_patchChecked = false;
 
+void safeRestart() {
+    // since we rename the original executable,
+    // geode updater is unable to see whether the game is still open
+    // so we will save the game and then crash it
+
+    AppDelegate::get()->trySaveGame(true);
+
+    log::info("Game saved, restarting...");
+
+    const auto workingDir = dirs::getGameDir();
+
+    wchar_t buffer[MAX_PATH];
+    GetModuleFileNameW(nullptr, buffer, MAX_PATH);
+    const auto gdName = fmt::format("\"{}\"", ghc::filesystem::path(buffer).filename().string());
+
+    // launch updater
+    const auto updaterPath = (workingDir / "GeodeUpdater.exe").string();
+    ShellExecuteA(nullptr, "open", updaterPath.c_str(), gdName.c_str(), workingDir.string().c_str(), false);
+
+    log::info("Updater launched, crashing game...");
+
+    std::exit(0);
+}
+
 bool is4GBPatchEnabled() {
     wchar_t result[MAX_PATH];
     GetModuleFileNameW(NULL, result, MAX_PATH);
@@ -46,7 +70,7 @@ void showSuccess() {
         "Restart",
         [](auto alert, bool btn2) {
             if(btn2) {
-                utils::game::restart();
+                safeRestart();
             }
         },
         false
