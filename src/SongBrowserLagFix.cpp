@@ -6,10 +6,12 @@
 #include <Geode/modify/GJSongBrowser.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 
+#include <shared_mutex>
+
 using namespace geode::prelude;
 
 static inline std::unordered_map<int, bool> s_downloadedSongs;
-static inline std::atomic_bool s_populating = false;
+static inline std::shared_mutex s_populating;
 void populateDownloadedSongsFast() {
     auto MDM = MusicDownloadManager::sharedState();
     std::vector<int> knownSongs;
@@ -24,8 +26,7 @@ void populateDownloadedSongsFast() {
     std::thread([knownSongs, songPath]() {
         thread::setName("Song Browser Lag Fix");
 
-        while(s_populating) { /* wait (spinlock) */}
-        s_populating = true;
+        std::unique_lock lock(s_populating);
         log::debug("Started populating downloaded songs cache");
         for(auto song : knownSongs) {
             if(ghc::filesystem::exists(fmt::format("{}/{}.mp3", std::string(songPath), song))) {
@@ -33,52 +34,57 @@ void populateDownloadedSongsFast() {
             }
         }
         log::debug("Finished populating downloaded songs cache");
-        s_populating = false;
     }).detach();
 }
 
 void resetSongsCache() {
-    while(s_populating) { /* wait (spinlock) */}
+    std::unique_lock lock(s_populating);
     s_downloadedSongs.clear();
     populateDownloadedSongsFast();
 }
 
 class $modify(BIMusicDownloadManager, MusicDownloadManager) {
     bool isSongDownloaded(int songID) {
+        std::shared_lock lock(s_populating);
         if(s_downloadedSongs.contains(songID)) {
             return s_downloadedSongs[songID];
         }
+        lock.unlock();
 
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock uLock(s_populating);
         s_downloadedSongs[songID] = MusicDownloadManager::isSongDownloaded(songID);
         return s_downloadedSongs[songID];
     }
 
     void downloadSong(int songID) {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs.erase(songID);
+        lock.unlock();
 
         MusicDownloadManager::downloadSong(songID);
     }
 
     void downloadCustomSong(int songID) {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs.erase(songID);
+        lock.unlock();
 
         MusicDownloadManager::downloadCustomSong(songID);
     }
 
     void limitDownloadedSongs() {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         s_downloadedSongs.clear();
+        lock.unlock();
 
         MusicDownloadManager::limitDownloadedSongs();
     }
 
     void onDownloadSongCompleted(CCHttpClient* client, CCHttpResponse* response) {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         auto songID = atoi(response->getHttpRequest()->getTag());
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs[songID] = true;
+        lock.unlock();
 
         MusicDownloadManager::onDownloadSongCompleted(client, response);
     }
@@ -88,7 +94,7 @@ class $modify(BIMusicDownloadManager, MusicDownloadManager) {
     void deleteSong(int songID) {
         MusicDownloadManager::deleteSong(songID);
 
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs.erase(songID);
     }
     #endif
@@ -104,15 +110,17 @@ class $modify(GJSongBrowser) {
 
 class $modify(BISBLLevelInfoLayer, LevelInfoLayer) {
     void onPlay(CCObject* sender) {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(this->m_level->m_songID)) s_downloadedSongs.erase(this->m_level->m_songID);
+        lock.unlock();
 
         LevelInfoLayer::onPlay(sender);
     }
 
     bool init(GJGameLevel* level, bool challenge) {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(level->m_songID)) s_downloadedSongs.erase(level->m_songID);
+        lock.unlock();
 
         return LevelInfoLayer::init(level, challenge);
     }
@@ -120,8 +128,9 @@ class $modify(BISBLLevelInfoLayer, LevelInfoLayer) {
 
 class $modify(CustomSongWidget) {
     void updateSongInfo() {
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(m_songInfoObject && s_downloadedSongs.contains(m_songInfoObject->m_songID)) s_downloadedSongs.erase(m_songInfoObject->m_songID);
+        lock.unlock();
 
         CustomSongWidget::updateSongInfo();
     }
@@ -131,7 +140,7 @@ class $modify(CustomSongWidget) {
 
         CustomSongWidget::deleteSong();
 
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
     }
 };
@@ -141,7 +150,7 @@ class $modify(CustomSongWidget) {
         auto id = m_songInfoObject ? m_songInfoObject->m_songID : 0;
         CustomSongCell::onDelete(sender);
 
-        while(s_populating) { /* wait (spinlock) */}
+        std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
     }
 };
