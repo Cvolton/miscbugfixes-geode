@@ -9,7 +9,7 @@
 using namespace geode::prelude;
 
 static inline std::unordered_map<int, bool> s_downloadedSongs;
-static inline bool s_populating = false;
+static inline std::atomic_bool s_populating = false;
 void populateDownloadedSongsFast() {
     auto MDM = MusicDownloadManager::sharedState();
     std::vector<int> knownSongs;
@@ -22,6 +22,8 @@ void populateDownloadedSongsFast() {
 
     auto songPath = GameManager::sharedState()->getGameVariable("0033") ? CCFileUtils::sharedFileUtils()->getWritablePath2() : CCFileUtils::sharedFileUtils()->getWritablePath();
     std::thread([knownSongs, songPath]() {
+        thread::setName("Song Browser Lag Fix");
+
         while(s_populating) { /* wait (spinlock) */}
         s_populating = true;
         log::debug("Started populating downloaded songs cache");
