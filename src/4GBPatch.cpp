@@ -128,7 +128,7 @@ class $modify(MenuLayer) {
         if(Mod::get()->getSettingValue<bool>("skip-4gb-patch-check")) return true;
 
         std::thread([this]() {
-            thread::setName("4GB Patch");
+            //thread::setName("4GB Patch");
 
             log::debug("Checking for 4GB patch...");
             if(is4GBPatchEnabled()) {
