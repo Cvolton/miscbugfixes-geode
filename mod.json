@@ -12,6 +12,7 @@
 	"description": "Fixes various issues with the game",
     "tags": ["bugfix"],
     "repository": "https://github.com/Cvolton/miscbugfixes-geode",
+    "early-load": true,
 	"settings": {
 		"skip-4gb-patch-check": {
             "name": "Skip 4GB Patch check",

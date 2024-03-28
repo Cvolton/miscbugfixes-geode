@@ -4,6 +4,7 @@
 #include <Geode/modify/CustomSongCell.hpp>
 #include <Geode/modify/CustomSongWidget.hpp>
 #include <Geode/modify/GJSongBrowser.hpp>
+#include <Geode/modify/MenuLayer.hpp>
 
 using namespace geode::prelude;
 
@@ -143,6 +144,18 @@ class $modify(CustomSongWidget) {
     }
 };
 
-$execute {
-    populateDownloadedSongsFast();
-}
+class $modify(MenuLayer) {
+    bool init() {
+        if(!MenuLayer::init()) return false;
+
+        static bool loaded = false;
+        if(loaded) return true;
+        loaded = true;
+
+        log::debug("Loading song browser lag fix");
+
+        populateDownloadedSongsFast();
+
+        return true;
+    }
+};
