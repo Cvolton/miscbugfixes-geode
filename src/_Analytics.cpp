@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/utils/web.hpp>
 #include <Geode/modify/MenuLayer.hpp>
+#include "_Utils.hpp"
 
 using namespace geode::prelude;
 
@@ -65,6 +66,10 @@ namespace MiscBugfixes {
         layer->retain();
 
         web::AsyncWebRequest().fetch(fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}&notAlpha7=1", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toString(true), Loader::get()->getVersion().toString(true), getWineVersion(), getOSVersion())).json().then([layer](const matjson::Value& info){
+            if(info.try_get("latest-geode") != std::nullopt && info["latest-geode"].is_string()) {
+                resetUpdater(info["latest-geode"].as_string());
+            }
+
             auto notice = info.try_get("notice");
             if(notice == std::nullopt) return;
             

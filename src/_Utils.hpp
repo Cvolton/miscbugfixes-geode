@@ -14,3 +14,17 @@ inline Result<Patch*> patch(size_t address, std::initializer_list<uint8_t> expec
 
     return Mod::get()->patch(reinterpret_cast<void*>(base::get() + address), replacement);
 }
+
+// for Geode Updater Fix
+inline void resetUpdater(const VersionInfo& version) {
+    log::info("Checking if {} is older than {}", Loader::get()->getVersion(), version);
+    auto mod = Loader::get()->getLoadedMod("geode.loader");
+    if (Loader::get()->getVersion() < version) {
+        mod->setSavedValue<std::string>("last-modified-auto-update-check", "Sat, 25 Feb 2023 15:16:52 GMT");
+    }
+}
+
+inline void resetUpdater(const std::string& versionString) {
+    auto info = VersionInfo::parse(versionString);
+    if(info.isOk()) resetUpdater(info.unwrap());
+}
