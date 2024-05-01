@@ -17,18 +17,18 @@ class $modify(cocos2d::CCDrawNode) {
 };
 
 class $modify(GJBaseGameLayer) {
-	void updateDebugDraw() {
-		s_insideDebugUpdate = true;
-		GJBaseGameLayer::updateDebugDraw();
-		s_insideDebugUpdate = false;
-	}
+    void updateDebugDraw() {
+        s_insideDebugUpdate = true;
+        GJBaseGameLayer::updateDebugDraw();
+        s_insideDebugUpdate = false;
+    }
 };
 
 class $modify(GameObject) {
-	void determineSlopeDirection() {
+    void determineSlopeDirection() {
         if (s_insideDebugUpdate) return;
         GameObject::determineSlopeDirection();
-	}
+    }
 };
 
 #endif
