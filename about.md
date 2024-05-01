@@ -6,6 +6,7 @@ Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
   - Reduced the likelihood at least, may still happen
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c> and not on game restart!
+- <cj>Show Hitboxes</c> not working with <co>mirror portals</c> (thanks Prevter)
 - <cj>Copy to Clipboard</c> not working (Android only)
 - <cj>Saved Songs</c> page switching <cr>lag</c>
 - <cj>Profiles</c> showing <cr>old/broken</c> usernames
