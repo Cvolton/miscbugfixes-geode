@@ -75,6 +75,15 @@ Misc Bugfixes opts to choose the second option in case a mod desires to utilize 
 
 See also HJfod's Twitter for an alternative explanation: https://twitter.com/HJfod/status/1760076909663158588
 
+### Wave trail acting weird in dual after player 2 enters a single portal
+The wave trail seems to have odd behavior when exiting dual mode when the player hitting the single portal is player 2:
+- If player 1 is wave and player 2 is non-wave, the trail from player 1 gets duplicated and the other copy jumps to player 2 briefly, before being deleted.
+  - If player 2 is wave, and player 1 is non-wave, this does not happen.
+- If player 1 is wave and player 2 is wave, the wave trail of player 2 gets deleted and a new one is started.
+  - However, if player 1 hits the single portal, the wave trail does not get deleted, and instead continues as usual.
+
+This fix makes player 2 hitting the single portal act identical to player 1 hitting it.
+
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
 
