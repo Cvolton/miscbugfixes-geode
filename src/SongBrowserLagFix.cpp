@@ -29,7 +29,7 @@ void populateDownloadedSongsFast() {
         std::unique_lock lock(s_populating);
         log::debug("Started populating downloaded songs cache");
         for(auto song : knownSongs) {
-            if(ghc::filesystem::exists(fmt::format("{}/{}.mp3", std::string(songPath), song))) {
+            if(std::filesystem::exists(fmt::format("{}/{}.mp3", std::string(songPath), song))) {
                 s_downloadedSongs[song] = true;
             }
         }
@@ -72,14 +72,6 @@ class $modify(BIMusicDownloadManager, MusicDownloadManager) {
         MusicDownloadManager::downloadCustomSong(songID);
     }
 
-    void limitDownloadedSongs() {
-        std::unique_lock lock(s_populating);
-        s_downloadedSongs.clear();
-        lock.unlock();
-
-        MusicDownloadManager::limitDownloadedSongs();
-    }
-
     void onDownloadSongCompleted(CCHttpClient* client, CCHttpResponse* response) {
         std::unique_lock lock(s_populating);
         auto songID = atoi(response->getHttpRequest()->getTag());
@@ -89,8 +81,19 @@ class $modify(BIMusicDownloadManager, MusicDownloadManager) {
         MusicDownloadManager::onDownloadSongCompleted(client, response);
     }
 
+    //TODO: onDownloadSongCompleted
+
     #ifndef GEODE_IS_WINDOWS
     // this function is inlined on windows
+
+    void limitDownloadedSongs() {
+        std::unique_lock lock(s_populating);
+        s_downloadedSongs.clear();
+        lock.unlock();
+
+        MusicDownloadManager::limitDownloadedSongs();
+    }
+
     void deleteSong(int songID) {
         MusicDownloadManager::deleteSong(songID);
 
@@ -145,7 +148,8 @@ class $modify(CustomSongWidget) {
     }
 };
 
-    class $modify(CustomSongCell) {
+// the button got deleted in 2.206
+/*class $modify(CustomSongCell) {
     void onDelete(CCObject* sender) {
         auto id = m_songInfoObject ? m_songInfoObject->m_songID : 0;
         CustomSongCell::onDelete(sender);
@@ -153,7 +157,7 @@ class $modify(CustomSongWidget) {
         std::unique_lock lock(s_populating);
         if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
     }
-};
+};*/
 
 class $modify(MenuLayer) {
     bool init() {

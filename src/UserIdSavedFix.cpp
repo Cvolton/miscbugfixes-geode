@@ -1,4 +1,6 @@
-#include <Geode/Geode.hpp>
+//TODO: version specific patches
+
+/*#include <Geode/Geode.hpp>
 #include "_Utils.hpp"
 
 using namespace geode::prelude;
@@ -48,4 +50,4 @@ $execute {
     if(result.isErr()) {
         log::error("Failed to apply user ID fix - {}", result.unwrapErr());
     }
-}
+}*/

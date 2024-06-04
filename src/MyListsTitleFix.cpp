@@ -3,8 +3,6 @@
 
 using namespace geode::prelude;
 
-static int g_cnt = 0;
-
 class $modify(LevelBrowserLayer) {
     // Fixes user's list search showing incorrect usernames
     // Also fixes the missing apostrophe in "x's Levels"

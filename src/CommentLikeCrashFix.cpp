@@ -4,7 +4,9 @@
 using namespace geode::prelude;
 
 class $modify(CommentCell) {
-    bool m_retained = false;
+    struct Fields {
+        bool m_retained = false;
+    };
 
     static void onModify(auto& self) {
         auto res = self.setHookPriority("CommentCell::onLike", 0x10000);
@@ -24,6 +26,8 @@ class $modify(CommentCell) {
     }
 
     void onLike(CCObject* sender) {
+        static_assert(&CommentCell::onLike);
+
         if(!this->m_comment) return;
 
         LikeItemType type = LikeItemType::Comment;

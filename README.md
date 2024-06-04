@@ -64,17 +64,6 @@ The fix checks for this specific condition and offers you to free the monster.
 
 The fix edits GeometryDash.exe to enable this flag. This edit persists even after the mod is uninstalled but a backup is available in the GD path, should the user wish to restore the original executable.
 
-### CCMenuItem::activate crash
-When you click a button, the game attempts to run code after its callback has been called. If the button callback removes the button (for example while closing a dialog), this can result in a crash, since it would already be removed and deallocated from memory when the post-callback code is called. This post-callback code is related to CCScriptManager, which can be used to attach scripts to buttons. Vanilla Geometry Dash never does this.
-
-There are 2 possible fixes for this issue:
-- Remove the CCScriptManager call, only making the button directly run the code it's meant to.
-- Retain the button and release it after all calls have been made
-
-Misc Bugfixes opts to choose the second option in case a mod desires to utilize the script feature of cocos for anything.
-
-See also HJfod's Twitter for an alternative explanation: https://twitter.com/HJfod/status/1760076909663158588
-
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
 
@@ -87,3 +76,17 @@ The fix simply reverts this change and makes the user ID be saved for all saved 
 The current Geode auto updater remember when it last checked for updates and only asks the server if any updates have come out since that time. It, however, does not verify whether the update check was succesful. This can, in some rare circumstances, cause people to skip a release.
 
 The fix forces Geode to check once again if the installed version is older than what was latest as of the last Geode update.
+
+### Formerly patched bugs
+#### CCMenuItem::activate crash
+When you click a button, the game attempts to run code after its callback has been called. If the button callback removes the button (for example while closing a dialog), this can result in a crash, since it would already be removed and deallocated from memory when the post-callback code is called. This post-callback code is related to CCScriptManager, which can be used to attach scripts to buttons. Vanilla Geometry Dash never does this.
+
+There are 2 possible fixes for this issue:
+- Remove the CCScriptManager call, only making the button directly run the code it's meant to.
+- Retain the button and release it after all calls have been made
+
+Misc Bugfixes opts to choose the second option in case a mod desires to utilize the script feature of cocos for anything.
+
+See also HJfod's Twitter for an alternative explanation: https://twitter.com/HJfod/status/1760076909663158588
+
+This bugfix is still relevant, however it has been moved to [https://github.com/geode-sdk/geode/releases/tag/v2.0.0-beta.23](Geode itself) due to how easy the bug might be to trigger by mod devs.

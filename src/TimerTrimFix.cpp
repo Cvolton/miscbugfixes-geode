@@ -1,3 +1,6 @@
+//TODO: version specific patches
+#if 0
+
 #include <Geode/Geode.hpp>
 #include "_Utils.hpp"
 
@@ -160,3 +163,5 @@ $execute {
         nopMac(0x61fc75, "AppDelegate::trySaveGame (patch 1)");
     #endif
 }
+
+#endif

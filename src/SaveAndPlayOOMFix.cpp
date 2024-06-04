@@ -1,4 +1,5 @@
-#include <Geode/Geode.hpp>
+//TODO: version specific patches
+/*#include <Geode/Geode.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/modify/GJGameLoadingLayer.hpp>
 #include <Geode/modify/GameManager.hpp>
@@ -143,14 +144,27 @@ class $modify(GameManager) {
     }
 };
 
-class $modify(GJGameLoadingLayer) {
-    CCLabelBMFont* m_loading = nullptr;
+class $modify(MBGJGameLoadingLayer, GJGameLoadingLayer) {
+    struct Fields {
+        CCLabelBMFont* m_loading = nullptr;
+    }
 
     static void onModify(auto& self) {
         (void) self.setHookPriority("GJGameLoadingLayer::loadLevel", 0x100000);
     }
 
-    bool init(GJGameLevel* level, bool editor) {
+    static GJGameLoadingLayer* transitionToLoadingLayer(GJGameLevel* level, bool editor) {
+        auto layer = static_cast<MBGJGameLoadingLayer>(GJGameLoadingLayer::transitionToLoadingLayer(level, editor));
+
+        layer->m_fields->m_loading = getChildOfType<CCLabelBMFont>(this, 0);
+        if(s_saveLater && layer->m_fields->m_loading) {
+            layer->m_fields->m_loading->setString("Saving...");
+        }
+
+        return true;
+    }
+
+    /*bool init(GJGameLevel* level, bool editor) {
         if(!GJGameLoadingLayer::init(level, editor)) return false;
 
         m_fields->m_loading = getChildOfType<CCLabelBMFont>(this, 0);
@@ -159,9 +173,9 @@ class $modify(GJGameLoadingLayer) {
         }
 
         return true;
-    }
+    }*/
 
-    void loadLevel() {
+/*    void loadLevel() {
         if(!s_saveLater) {
             GJGameLoadingLayer::loadLevel();
             return;
@@ -178,4 +192,4 @@ class $modify(GJGameLoadingLayer) {
             loadLevel();
         });
     }
-};
+};*/
