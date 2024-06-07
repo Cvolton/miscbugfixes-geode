@@ -1,5 +1,5 @@
 #include <Geode/Geode.hpp>
-#include <Geode/utils/web2.hpp>
+#include <Geode/utils/web.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include "_Utils.hpp"
 
