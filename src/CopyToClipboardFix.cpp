@@ -3,6 +3,7 @@
 #ifdef GEODE_IS_ANDROID
 
 #include <Geode/modify/InfoLayer.hpp>
+#include <Geode/modify/ProfilePage.hpp>
 
 using namespace geode::prelude;
 
