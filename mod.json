@@ -1,5 +1,5 @@
 {
-	"geode": "3.2.0",
+	"geode": "3.4.0",
 	"version": "v1.2.0-beta.2",
 	"gd": {
         "win": "2.206",
@@ -14,5 +14,19 @@
     "repository": "https://github.com/Cvolton/miscbugfixes-geode",
     "early-load": true,
 	"settings": {
+		"practice-mode-title": {
+            "name": "Practice Mode",
+            "type": "custom"
+        },
+		"practice-mode-ignore-damage": {
+            "name": "Fix \"Ignore Damage\" changing physics",
+            "type": "bool",
+			"default": true
+        },
+		"practice-mode-show-hitboxes": {
+            "name": "Fix \"Show Hitboxes\" changing physics",
+            "type": "bool",
+			"default": true
+        }
 	}
 }
