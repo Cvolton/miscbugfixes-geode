@@ -17,10 +17,12 @@ $on_mod(DataLoaded) {
 }
 
 class $modify(PlayLayer) {
-    void togglePracticeMode(bool toggle) {
-        if (toggle && s_shouldApplyAnticheatFix) {
-            PlayLayer::destroyPlayer(m_player1, m_anticheatSpike);
+    void setupHasCompleted() {
+        if (m_isIgnoreDamageEnabled && s_shouldApplyAnticheatFix) {
+            Loader::get()->queueInMainThread([this] {
+                PlayLayer::destroyPlayer(m_player1, m_anticheatSpike);
+            });
         }
-        PlayLayer::togglePracticeMode(toggle);
+        PlayLayer::setupHasCompleted();
     }
 };
