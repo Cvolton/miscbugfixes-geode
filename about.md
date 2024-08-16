@@ -7,8 +7,6 @@ Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
 - <cj>Show Hitboxes</c> changing <cl>physics</c> during <co>mirror portal transitions</c>
 - <cj>Ignore Damage</c> breaking <cl>slope physics</c>
 ### Other
-- <cj>Save and Play</c> out of memory <cr>crash</c> (2.206 not yet)
-  - Reduced the likelihood at least, may still happen
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c> and not on game restart!
 - <cj>Copy to Clipboard</c> not working (Android only)
