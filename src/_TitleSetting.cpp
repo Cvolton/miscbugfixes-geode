@@ -53,4 +53,5 @@ public:
 
 $on_mod(Loaded) {
     Mod::get()->addCustomSetting<TitleSettingValue>("practice-mode-title", false);
+    Mod::get()->addCustomSetting<TitleSettingValue>("other-title", false);
 }

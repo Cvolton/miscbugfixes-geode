@@ -9,7 +9,7 @@
 	"id": "cvolton.misc_bugfixes",
 	"name": "Misc Bugfixes",
 	"developer": "Cvolton",
-	"description": "Fixes various issues with the game",
+	"description": "Fixes several bugs in Geometry Dash - The 2.207 before actual 2.207...",
     "tags": ["bugfix"],
     "repository": "https://github.com/Cvolton/miscbugfixes-geode",
     "early-load": true,
@@ -25,6 +25,15 @@
         },
 		"practice-mode-show-hitboxes": {
             "name": "Fix \"Show Hitboxes\" changing physics",
+            "type": "bool",
+			"default": true
+        },
+		"other-title": {
+            "name": "Other",
+            "type": "custom"
+        },
+		"other-wave-trail-fix": {
+            "name": "Fix Player 2 Wave Trail visual bug",
             "type": "bool",
 			"default": true
         }

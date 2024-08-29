@@ -1,5 +1,5 @@
 # Misc Bugfixes
-Fixes several bugs in Geometry Dash. The 2.207 before actual 2.207...
+The 2.207 before actual 2.207...
 
 ## Fixed bugs:
 ### Practice Mode

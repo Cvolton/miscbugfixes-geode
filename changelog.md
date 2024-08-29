@@ -1,9 +1,14 @@
 # Changelog
-## <cg>v1.2.0</c> (2024-08-30)
+## <cg>v1.2.0</c> (2024-08-29)
 * <cg>Added</c> <cj>Show Hitboxes</c> <co>Mirror Portal</c> fix
   * Both the visual bug and the physics change bug
-* <cg>Added</c> <cj>Ignore Damage</c> physics fix
-* <cg>Added</c> <cj>Wave Trail</c> P2 fix
+* <cg>Added</c> <cj>Ignore Damage</c> <co>physics</c> fix
+* <cg>Added</c> <cj>Wave Trail</c> teleporting when P2 enters a single portal fix
+* <cg>Added</c> <cj>Settings</c> to disable some bugfixes
+* <cr>Removed</c> <cj>Save and Play OOM fix</c>
+  * Caused maintainability issues and potential mod conflicts
+  * Also it is much less necessary in 2.206
+* <cr>Removed</c> <cj>4GB Patch</c> (no longer necessary)
 
 ## <cg>v1.1.3</c> (2024-04-20)
 * <cg>Improved</c> <cj>Geode Auto Updater</c> fix
