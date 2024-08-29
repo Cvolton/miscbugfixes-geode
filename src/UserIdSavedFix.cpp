@@ -27,7 +27,7 @@ $execute {
         );
     #elif defined(GEODE_IS_ARM_MAC)
         static_assert(GEODE_COMP_GD_VERSION == 22060, "Wrong GD version detected");
-        //patch JZ to jump by 0 bytes
+        // NOP out CBZ
         auto result = patch(
             0x4b4238,
             {0x15, 0x01, 0x00, 0x34},
