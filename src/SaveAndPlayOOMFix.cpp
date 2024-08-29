@@ -164,7 +164,7 @@ class $modify(MBGJGameLoadingLayer, GJGameLoadingLayer) {
         return true;
     }
 
-    /*bool init(GJGameLevel* level, bool editor) {
+    / *bool init(GJGameLevel* level, bool editor) {
         if(!GJGameLoadingLayer::init(level, editor)) return false;
 
         m_fields->m_loading = getChildOfType<CCLabelBMFont>(this, 0);
@@ -173,9 +173,9 @@ class $modify(MBGJGameLoadingLayer, GJGameLoadingLayer) {
         }
 
         return true;
-    }*/
+    }* /
 
-/*    void loadLevel() {
+    void loadLevel() {
         if(!s_saveLater) {
             GJGameLoadingLayer::loadLevel();
             return;
