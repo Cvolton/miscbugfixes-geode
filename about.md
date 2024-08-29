@@ -1,5 +1,5 @@
 # Misc Bugfixes
-Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
+Fixes several bugs in Geometry Dash. Doesn't affect Normal Mode gameplay at all.
 
 ## Fixed bugs:
 ### Practice Mode
@@ -11,7 +11,7 @@ Fixes several bugs in Geometry Dash. Doesn't affect gameplay at all.
   - <co>Demon Keys</c> are now awarded <cg>immediately</c>, not on restart!
 - <cj>Copy to Clipboard</c> not working (Android only)
 - <cj>Saved Songs</c> page switching <cr>lag</c>
-- <cj>Profiles</c> showing <cr>old/broken</c> usernames (2.206 not fully yet)
+- <cj>Profiles</c> showing <cr>old/broken</c> usernames
 - <cj>"My Lists" Search</c> showing <cr>incorrect usernames</c>
 - <cj>Lists</c> containing <cr>deleted levels</c> not being playable
 - <cj>Basement monster</c> <cr>softlock</c>
