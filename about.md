@@ -1,5 +1,5 @@
 # Misc Bugfixes
-Fixes several bugs in Geometry Dash. Doesn't affect Normal Mode gameplay at all.
+Fixes several bugs in Geometry Dash. The 2.207 before actual 2.207...
 
 ## Fixed bugs:
 ### Practice Mode
@@ -9,6 +9,7 @@ Fixes several bugs in Geometry Dash. Doesn't affect Normal Mode gameplay at all.
 ### Other
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c>, not on restart!
+- <cj>Wave trail</c> <cr>teleporting</c> when <co>player 2</c> enters a single portal
 - <cj>Copy to Clipboard</c> not working (Android only)
 - <cj>Saved Songs</c> page switching <cr>lag</c>
 - <cj>Profiles</c> showing <cr>old/broken</c> usernames
@@ -17,9 +18,9 @@ Fixes several bugs in Geometry Dash. Doesn't affect Normal Mode gameplay at all.
 - <cj>Basement monster</c> <cr>softlock</c>
 - A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at once
 - <cr>"12 days left"</c> timer bug
-- <cr>Wave trail</c> acting weird in dual after <co>player 2</c> enters a single portal
 
 For a technical breakdown of the fixed bugs see [readme.md](https://github.com/Cvolton/miscbugfixes-geode/blob/master/README.md)
 
 ## Special Thanks
 - Prevter: Contributed both Show Hitboxes fixes
+- NyteLite: Contributed the Wave trail fix

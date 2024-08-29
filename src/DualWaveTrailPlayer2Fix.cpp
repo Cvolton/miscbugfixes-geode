@@ -5,24 +5,28 @@ using namespace geode::prelude;
 
 class $modify(GJBaseGameLayer) {
 
-  void toggleDualMode(GameObject* portal, bool state, PlayerObject* playerTouchingPortal, bool p4) {
+void toggleDualMode(GameObject* portal, bool state, PlayerObject* playerTouchingPortal, bool p4) {
     if (!state && playerTouchingPortal == m_player2) {
-      if (m_player2->m_isDart) {
-        HardStreak* trailBackup = m_player2->m_waveTrail->createDuplicate();
-        // the game will fade both of these trails out, blank the player2 trail so it's invisible
-        m_player2->m_waveTrail->reset();
-        GJBaseGameLayer::toggleDualMode(portal, state, playerTouchingPortal, p4);
-        // now add back the points from the original player 2 trail
-        m_player1->m_waveTrail->reset();
-        CCArrayExt<PointNode*> pointNodeArray = trailBackup->m_pointArray;
-        for (PointNode* pointNode : pointNodeArray) m_player1->m_waveTrail->addPoint(pointNode->m_point);
-      } else {
-        GJBaseGameLayer::toggleDualMode(portal, state, playerTouchingPortal, p4);
-        m_player1->m_waveTrail->reset();
-      }
+        if (m_player2->m_isDart) {
+            std::vector<CCPoint> points;
+            for(auto pointNode : CCArrayExt<PointNode*>(m_player2->m_waveTrail->m_pointArray)) {
+                points.push_back(pointNode->m_point);
+            }
+            // the game will fade both of these trails out, blank the player2 trail so it's invisible
+            m_player2->m_waveTrail->reset();
+            GJBaseGameLayer::toggleDualMode(portal, state, playerTouchingPortal, p4);
+            // now add back the points from the original player 2 trail
+            m_player1->m_waveTrail->reset();
+            for (auto& point : points) {
+                m_player1->m_waveTrail->addPoint(point);
+            }
+        } else {
+            GJBaseGameLayer::toggleDualMode(portal, state, playerTouchingPortal, p4);
+            m_player1->m_waveTrail->reset();
+        }
     } else {
-      GJBaseGameLayer::toggleDualMode(portal, state, playerTouchingPortal, p4);
+        GJBaseGameLayer::toggleDualMode(portal, state, playerTouchingPortal, p4);
     }
-  }
+}
 
 };

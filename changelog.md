@@ -1,7 +1,9 @@
 # Changelog
-## <cg>v1.2.0</c> (2024-05-00)
+## <cg>v1.2.0</c> (2024-08-30)
 * <cg>Added</c> <cj>Show Hitboxes</c> <co>Mirror Portal</c> fix
-* Beta 2 - enabled mac support again
+  * Both the visual bug and the physics change bug
+* <cg>Added</c> <cj>Ignore Damage</c> physics fix
+* <cg>Added</c> <cj>Wave Trail</c> P2 fix
 
 ## <cg>v1.1.3</c> (2024-04-20)
 * <cg>Improved</c> <cj>Geode Auto Updater</c> fix
