@@ -26,7 +26,20 @@ $on_mod(DataLoaded) {
 // mirrored hitboxes invisible fix
 class $modify(cocos2d::CCDrawNode) {
     bool drawPolygon(CCPoint *verts, unsigned int count, const ccColor4F &fillColor, float borderWidth, const ccColor4F &borderColor) {
-        return CCDrawNode::drawPolygon(verts, count, fillColor, std::abs(borderWidth), borderColor);
+        if(s_insideDebugUpdate) {
+            borderWidth = std::abs(borderWidth);
+        }
+
+        return CCDrawNode::drawPolygon(verts, count, fillColor, borderWidth, borderColor);
+    }
+
+    bool drawCircle(const cocos2d::CCPoint& position, float radius, const cocos2d::ccColor4F& color, float borderWidth, const cocos2d::ccColor4F& borderColor, unsigned int segments) {
+        if(s_insideDebugUpdate) {
+            borderWidth = std::abs(borderWidth);
+            m_bUseArea = false;
+        }
+
+        return CCDrawNode::drawCircle(position, radius, color, borderWidth, borderColor, segments);
     }
 };
 

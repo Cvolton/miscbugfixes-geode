@@ -58,6 +58,8 @@ The fix checks for this specific condition and offers you to free the monster.
 #### <cj>Show Hitboxes</c> not working with <co>mirror portals</c>
 While most of the framework for rendering mirrored hitboxes is in place, RobTop also accidentally mirrors the line width, which as a result becomes negative. This means that the line is drawn with 0px size, so it is not drawn at all in the end. The fix makes the line width use its absolute value, so negative line width still gets drawn.
 
+This is not the only issue preventing hitboxes from getting drawn though. The game restricts drawn circular hitboxes to the game area. This is meant to be a performance improvement, however it is another reason why these don't work in mirrored mode - the game area is incorrectly calculated, causing only offscreen hitboxes to get drawn. Because the performance difference was within the margin of error in our testing (49 vs 50 FPS in a stress test with 11k saws) and it was a much easier solution, the fix here disables this restriction.
+
 Special thanks to Prevter for this fix.
 
 #### <cj>Show Hitboxes</c> changing <cl>physics</c> during <co>mirror portal transitions</c>
@@ -72,15 +74,6 @@ Special thanks to Prevter for this fix and for the bug description (PR #10).
 To avoid illegitimate noclip hacks, the game has an anticheat measure, where after you spawn, you have to get killed by an invisible noclip spike. This is completely transparent to the user and doesn't trigger an actual death, instead it sets an "anticheat passed" flag internally. If this flag is not set, slope physics are different to mess with the user. Unfortunately RobTop didn't realize, that his noclip implementation would also trigger this anticheat, so the user is stuck with its consequences.
 
 The fix forces a death by the anticheat spike when you spawn into a level with ignore damage enabled to make sure the anticheat passed flag is set correctly.
-
-### Wave trail acting weird in dual after player 2 enters a single portal
-The wave trail seems to have odd behavior when exiting dual mode when the player hitting the single portal is player 2:
-- If player 1 is wave and player 2 is non-wave, the trail from player 1 gets duplicated and the other copy jumps to player 2 briefly, before being deleted.
-  - If player 2 is wave, and player 1 is non-wave, this does not happen.
-- If player 1 is wave and player 2 is wave, the wave trail of player 2 gets deleted and a new one is started.
-  - However, if player 1 hits the single portal, the wave trail does not get deleted, and instead continues as usual.
-
-This fix makes player 2 hitting the single portal act identical to player 1 hitting it.
 
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
