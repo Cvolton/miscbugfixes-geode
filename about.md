@@ -16,7 +16,7 @@ Fixes several bugs in Geometry Dash. Doesn't affect Normal Mode gameplay at all.
 - <cj>Lists</c> containing <cr>deleted levels</c> not being playable
 - <cj>Basement monster</c> <cr>softlock</c>
 - A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at once
-- <cr>"12 days left"</c> timer bug (2.206 not yet)
+- <cr>"12 days left"</c> timer bug
 
 For a technical breakdown of the fixed bugs see [readme.md](https://github.com/Cvolton/miscbugfixes-geode/blob/master/README.md)
 
