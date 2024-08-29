@@ -18,6 +18,8 @@ NTSYSAPI NTSTATUS NTAPI RtlGetVersion(PRTL_OSVERSIONINFOEXW lpVersionInformation
 }
 #endif
 
+static std::optional<web::WebTask> s_requestTask = std::nullopt;
+
 namespace MiscBugfixes {
     // https://www.winehq.org/pipermail/wine-devel/2008-September/069387.html
     std::string getWineVersion() {
@@ -52,10 +54,20 @@ namespace MiscBugfixes {
 
             NTSTATUS status = RtlGetVersion(&osVers);
 
-            return fmt::format("Windows {}.{}.{}", osVers.dwMajorVersion, osVers.dwMinorVersion, osVers.dwBuildNumber);
+            return fmt::format("Windows%20{}.{}.{}", osVers.dwMajorVersion, osVers.dwMinorVersion, osVers.dwBuildNumber);
         #else
             return GEODE_PLATFORM_NAME;
         #endif
+    }
+
+    void onNoticesFailed(CCLayer* layer, const std::string& error = "") {
+        log::warn("Fetching important notices failed: {}", error);
+        s_requestTask = std::nullopt;
+        layer->release();
+    }
+
+    std::string getUserAgent() {
+        return fmt::format("Misc Bugfixes {} / Geode {}", Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true));
     }
 
     void loadImportantNotices(CCLayer* layer) {
@@ -65,24 +77,42 @@ namespace MiscBugfixes {
 
         layer->retain();
 
-        web::AsyncWebRequest().fetch(fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}&notAlpha7=1", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toString(true), Loader::get()->getVersion().toString(true), getWineVersion(), getOSVersion())).json().then([layer](const matjson::Value& info){
-            if(info.try_get("latest-geode") != std::nullopt && info["latest-geode"].is_string()) {
-                resetUpdater(info["latest-geode"].as_string());
-            }
+        auto url = fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true), getWineVersion(), getOSVersion());
+        log::info("Fetching important notices from: {}", url);
 
-            auto notice = info.try_get("notice");
-            if(notice == std::nullopt) return;
-            
-            if(info["notice"].is_string()) {
-                auto alert = FLAlertLayer::create(Mod::get()->getName().c_str(), info["notice"].as_string(), "OK");
-                alert->m_scene = layer;
-                alert->show();
-                layer->release();
+        s_requestTask = web::WebRequest().userAgent(getUserAgent()).get(url).map(
+            [layer](web::WebResponse* response) {
+                if(!response->ok()) {
+                    onNoticesFailed(layer, std::to_string(response->code()));
+                    return *response;
+                }
+
+                auto result = response->json();
+                if(!result) {
+                    onNoticesFailed(layer, "Invalid JSON");
+                    return *response;
+                }
+
+                auto info = result.unwrap();
+                if(info.try_get("latest-geode") != std::nullopt && info["latest-geode"].is_string()) {
+                    resetUpdater(info["latest-geode"].as_string());
+                }
+
+                auto notice = info.try_get("notice");
+                if(notice == std::nullopt) return *response;
+                
+                if(info["notice"].is_string()) {
+                    auto alert = FLAlertLayer::create(Mod::get()->getName().c_str(), info["notice"].as_string(), "OK");
+                    alert->m_scene = layer;
+                    alert->show();
+                    layer->release();
+                }
+
+                s_requestTask = std::nullopt;
+
+                return *response;
             }
-        }).expect([layer](const std::string& error){
-            log::warn("Fetching important notices failed: {}", error);
-            layer->release();
-        });
+        );
     }
 }
 

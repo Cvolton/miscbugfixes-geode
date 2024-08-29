@@ -1,6 +1,7 @@
 # Changelog
 ## <cg>v1.2.0</c> (2024-05-00)
 * <cg>Added</c> <cj>Show Hitboxes</c> <co>Mirror Portal</c> fix
+* Beta 2 - enabled mac support again
 
 ## <cg>v1.1.3</c> (2024-04-20)
 * <cg>Improved</c> <cj>Geode Auto Updater</c> fix
