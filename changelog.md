@@ -1,10 +1,14 @@
 # Changelog
+## <cg>v1.2.1</c> (2024-08-30)
+* <cg>Fixed</c> an <cp>Android-only</c> crash related to the lists fix
+
 ## <cg>v1.2.0</c> (2024-08-29)
 * <cg>Added</c> <cj>Show Hitboxes</c> <co>Mirror Portal</c> fix
   * Both the visual bug and the physics change bug
 * <cg>Added</c> <cj>Ignore Damage</c> <co>physics</c> fix
 * <cg>Added</c> <cj>Wave Trail</c> teleporting when P2 enters a single portal fix
 * <cg>Added</c> <cj>Settings</c> to disable some bugfixes
+* <cg>Added</c> <cj>Lists</c> not loading levels fix
 * <cr>Removed</c> <cj>Save and Play OOM fix</c>
   * Caused maintainability issues and potential mod conflicts
   * Also it is much less necessary in 2.206
