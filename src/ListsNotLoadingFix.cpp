@@ -1,32 +1,15 @@
 #include <Geode/Geode.hpp>
+#include <Geode/modify/LevelBrowserLayer.hpp>
 #include <Geode/modify/LevelListLayer.hpp>
 #include <Geode/modify/LevelCell.hpp>
 
 using namespace geode::prelude;
 
-class $modify(LevelListLayer) {
+class $modify(MBLevelListLayer, LevelListLayer) {
     struct Fields {
         bool m_isBeingFixed = false;
         std::string m_key;
     };
-
-    void loadLevelsFailed(char const* key, int type) {
-        LevelListLayer::loadLevelsFailed(key, type);
-        
-        auto sv = std::string_view(key);
-        if(!sv.starts_with("25")) return;
-
-        log::info("LevelListLayer::loadLevelsFailed: key = {}, type = {}", key, type);
-        log::info("levelsString: {}", m_levelList->m_levelsString);
-
-        m_searchObject->m_searchType = SearchType::Type26;
-        m_searchObject->m_searchQuery = m_levelList->m_levelsString;
-
-        m_fields->m_isBeingFixed = true;
-        m_fields->m_key = key;
-
-        GameLevelManager::sharedState()->getOnlineLevels(m_searchObject);
-    }
 
     void loadLevelsFinished(cocos2d::CCArray* levels, char const* key, int type) {
         auto sv = std::string_view(key);
@@ -38,6 +21,30 @@ class $modify(LevelListLayer) {
         }
 
         LevelListLayer::loadLevelsFinished(levels, key, type);
+    }
+};
+
+class $modify(LevelBrowserLayer) {
+    void loadLevelsFailed(char const* key, int type) {
+        LevelBrowserLayer::loadLevelsFailed(key, type);
+
+        if(auto self = typeinfo_cast<LevelListLayer*>(this)) {
+            auto sv = std::string_view(key);
+            if(!sv.starts_with("25")) return;
+
+            log::info("LevelListLayer::loadLevelsFailed: key = {}, type = {}", key, type);
+            log::info("levelsString: {}", self->m_levelList->m_levelsString);
+
+            m_searchObject->m_searchType = SearchType::Type26;
+            m_searchObject->m_searchQuery = self->m_levelList->m_levelsString;
+
+            auto selfFields = reinterpret_cast<MBLevelListLayer*>(self);
+
+            selfFields->m_fields->m_isBeingFixed = true;
+            selfFields->m_fields->m_key = key;
+
+            GameLevelManager::sharedState()->getOnlineLevels(m_searchObject);
+        }
     }
 };
 
