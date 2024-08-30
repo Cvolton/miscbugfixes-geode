@@ -75,6 +75,11 @@ To avoid illegitimate noclip hacks, the game has an anticheat measure, where aft
 
 The fix forces a death by the anticheat spike when you spawn into a level with ignore damage enabled to make sure the anticheat passed flag is set correctly.
 
+#### <cj>Lists</c> containing <cr>deleted levels</c> not being playable
+When a list contains a deleted level, an empty record is sent in its place. This would be handled fine by the client if it wasn't for the hash validation in getGJLevels, where the hash calculated by the server doesn't account for this empty record and therefore the hash doesn't match.
+
+A proper fix for this issue would be to resolve the issue server-side. The workaround in this mod is that when loading list levels fails, it tries to load them with the method used for loading levels in a created list instead.
+
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
 
