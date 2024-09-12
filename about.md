@@ -23,4 +23,4 @@ For a technical breakdown of the fixed bugs see [readme.md](https://github.com/C
 
 ## Special Thanks
 - Prevter: Contributed both Show Hitboxes fixes
-- NyteLite: Contributed the Wave trail fix
+- NyteLyte: Contributed the Wave trail fix
