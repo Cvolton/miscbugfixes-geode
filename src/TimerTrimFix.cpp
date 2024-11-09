@@ -3,6 +3,8 @@
 
 using namespace geode::prelude;
 
+#if 0
+
 void nopWindows(size_t address, const char* funcName) {
     auto result = patch(
         address,
@@ -139,3 +141,5 @@ $execute {
         static_assert(false, "Unsupported platform");
     #endif
 }
+
+#endif

@@ -1,8 +1,8 @@
 {
-	"geode": "3.4.0",
+	"geode": "3.9.0",
 	"version": "v1.2.1",
 	"gd": {
-        "win": "2.206",
+        "win": "2.2073",
         "android": "2.206",
         "mac": "2.206"
     },
@@ -14,23 +14,18 @@
     "repository": "https://github.com/Cvolton/miscbugfixes-geode",
     "early-load": true,
 	"settings": {
-		"practice-mode-title": {
+        "practice-mode-title": {
             "name": "Practice Mode",
-            "type": "custom"
-        },
-		"practice-mode-ignore-damage": {
-            "name": "Fix \"Ignore Damage\" changing physics",
-            "type": "bool",
-			"default": true
+            "type": "title"
         },
 		"practice-mode-show-hitboxes": {
             "name": "Fix \"Show Hitboxes\" changing physics",
             "type": "bool",
 			"default": true
         },
-		"other-title": {
+        "other-title": {
             "name": "Other",
-            "type": "custom"
+            "type": "title"
         },
 		"other-wave-trail-fix": {
             "name": "Fix Player 2 Wave Trail visual bug",
