@@ -5,7 +5,6 @@ The 2.207 before actual 2.207...
 ### Practice Mode
 - <cj>Show Hitboxes</c> not working with <co>mirror portals</c>
 - <cj>Show Hitboxes</c> changing <cl>physics</c> during <co>mirror portal transitions</c>
-- <cj>Ignore Damage</c> breaking <cl>slope physics</c>
 ### Other
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c>, not on restart!
