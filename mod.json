@@ -11,7 +11,9 @@
 	"developer": "Cvolton",
 	"description": "Fixes several bugs in Geometry Dash - The 2.207 before actual 2.207...",
     "tags": ["bugfix"],
-    "repository": "https://github.com/Cvolton/miscbugfixes-geode",
+	"links": {
+		"source": "https://github.com/Cvolton/miscbugfixes-geode"
+	},
     "early-load": true,
 	"settings": {
         "practice-mode-title": {
