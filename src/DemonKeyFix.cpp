@@ -15,7 +15,7 @@ class $modify(MenuLayer) {
         auto old = GameStatsManager::sharedState()->getStat("22");
         auto diff = total - old;
 
-        auto differences = Mod::get()->getSavedValue<matjson::Array>("differences");
+        auto differences = Mod::get()->getSavedValue<std::vector<int>>("differences");
         if(diff != 0) differences.push_back(diff);
         Mod::get()->setSavedValue("differences", differences);
 

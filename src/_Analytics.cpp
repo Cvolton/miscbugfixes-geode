@@ -94,15 +94,12 @@ namespace MiscBugfixes {
                 }
 
                 auto info = result.unwrap();
-                if(info.try_get("latest-geode") != std::nullopt && info["latest-geode"].is_string()) {
-                    resetUpdater(info["latest-geode"].as_string());
+                if(auto res = info["latest-geode"].asString()) {
+                    resetUpdater(res.unwrap());
                 }
-
-                auto notice = info.try_get("notice");
-                if(notice == std::nullopt) return *response;
                 
-                if(info["notice"].is_string()) {
-                    auto alert = FLAlertLayer::create(Mod::get()->getName().c_str(), info["notice"].as_string(), "OK");
+                if(auto res = info["notice"].asString()) {
+                    auto alert = FLAlertLayer::create(Mod::get()->getName().c_str(), res.unwrap(), "OK");
                     alert->m_scene = layer;
                     alert->show();
                     layer->release();

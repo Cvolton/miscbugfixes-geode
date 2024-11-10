@@ -1,5 +1,5 @@
 {
-	"geode": "3.9.0",
+	"geode": "4.0.0",
 	"version": "v1.2.1",
 	"gd": {
         "win": "2.2073",
@@ -9,7 +9,7 @@
 	"id": "cvolton.misc_bugfixes",
 	"name": "Misc Bugfixes",
 	"developer": "Cvolton",
-	"description": "Fixes several bugs in Geometry Dash - The 2.207 before actual 2.207...",
+	"description": "Fixes several bugs in Geometry Dash - The 2.2074 before actual 2.2074...",
     "tags": ["bugfix"],
 	"links": {
 		"source": "https://github.com/Cvolton/miscbugfixes-geode"

@@ -1,6 +1,5 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
-#include <Geode/loader/SettingEvent.hpp>
 
 using namespace geode::prelude;
 

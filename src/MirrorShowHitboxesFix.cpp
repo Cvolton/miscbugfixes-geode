@@ -5,7 +5,6 @@
 #include <Geode/modify/CCDrawNode.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
 #include <Geode/modify/GameObject.hpp>
-#include <Geode/loader/SettingEvent.hpp>
 
 using namespace geode::prelude;
 
