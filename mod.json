@@ -1,15 +1,15 @@
 {
 	"geode": "4.0.0-alpha.1",
-	"version": "v1.2.1",
+	"version": "v1.3.0-beta.1",
 	"gd": {
         "win": "2.2074",
-        "android": "2.206",
-        "mac": "2.206"
+        "android": "2.2074",
+        "mac": "2.2074"
     },
 	"id": "cvolton.misc_bugfixes",
 	"name": "Misc Bugfixes",
 	"developer": "Cvolton",
-	"description": "Fixes several bugs in Geometry Dash - The 2.2074 before actual 2.2074...",
+	"description": "Fixes several bugs in Geometry Dash - The 2.2075 before actual 2.2075...",
     "tags": ["bugfix"],
 	"links": {
 		"source": "https://github.com/Cvolton/miscbugfixes-geode"

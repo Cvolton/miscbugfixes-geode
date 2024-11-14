@@ -1,4 +1,9 @@
 # Changelog
+## <cg>v1.3.0</c> (2024-11-??)
+* <cg>Added</c> <cj>GD 2.207</c> support
+* <cr>Removed</c> <cj>Ignore Damage</c> <co>physics</c> fix
+  * Bug fixed by RobTop now
+
 ## <cg>v1.2.1</c> (2024-08-30)
 * <cg>Fixed</c> an <cp>Android-only</c> crash related to the lists fix
 

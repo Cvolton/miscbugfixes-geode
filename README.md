@@ -70,11 +70,6 @@ The fix simply disables that `GameObject::determineSlopeDirection` call, which f
 
 Special thanks to Prevter for this fix and for the bug description (PR #10).
 
-#### <cj>Ignore Damage</c> breaking <cl>slope physics</c>
-To avoid illegitimate noclip hacks, the game has an anticheat measure, where after you spawn, you have to get killed by an invisible noclip spike. This is completely transparent to the user and doesn't trigger an actual death, instead it sets an "anticheat passed" flag internally. If this flag is not set, slope physics are different to mess with the user. Unfortunately RobTop didn't realize, that his noclip implementation would also trigger this anticheat, so the user is stuck with its consequences.
-
-The fix forces a death by the anticheat spike when you spawn into a level with ignore damage enabled to make sure the anticheat passed flag is set correctly.
-
 #### <cj>Lists</c> containing <cr>deleted levels</c> not being playable
 When a list contains a deleted level, an empty record is sent in its place. This would be handled fine by the client if it wasn't for the hash validation in getGJLevels, where the hash calculated by the server doesn't account for this empty record and therefore the hash doesn't match.
 
@@ -120,3 +115,10 @@ Since Geometry Dash forces CCLocalLevels.dat to save before the editor is closed
 The fix in this mod switches the game to a "Saving..." screen before saving the CCLocalLevels.dat file, which forces the editor to unload and therefore reduces the overall memory usage.
 
 This fix has been disabled due to it being difficult to maintain across versions and the crash being much harder to trigger with the introduction of the 64-bit Windows version. It is also a potential point of conflict with EditorCollab and BetterEdit mods.
+
+### <cj>Ignore Damage</c> breaking <cl>slope physics</c>
+To avoid illegitimate noclip hacks, the game has an anticheat measure, where after you spawn, you have to get killed by an invisible noclip spike. This is completely transparent to the user and doesn't trigger an actual death, instead it sets an "anticheat passed" flag internally. If this flag is not set, slope physics are different to mess with the user. Unfortunately RobTop didn't realize, that his noclip implementation would also trigger this anticheat, so the user is stuck with its consequences.
+
+The fix forces a death by the anticheat spike when you spawn into a level with ignore damage enabled to make sure the anticheat passed flag is set correctly.
+
+This bug was fixed by RobTop in update 2.207.
