@@ -1,5 +1,5 @@
 # Changelog
-## <cg>v1.3.0</c> (2024-11-??)
+## <cg>v1.3.0</c> (2024-11-15)
 * <cg>Added</c> <cj>GD 2.207</c> support
 * <cr>Removed</c> <cj>Ignore Damage</c> <co>physics</c> fix
   * Bug fixed by RobTop now
