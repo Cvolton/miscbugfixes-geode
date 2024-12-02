@@ -33,7 +33,7 @@ namespace MiscBugfixes {
             pwine_get_version = (const char *(__cdecl *)(void))GetProcAddress(hntdll, "wine_get_version");
             if(pwine_get_version)
             {
-                return fmt::format("Wine {}", pwine_get_version());
+                return fmt::format("Wine%20{}", pwine_get_version());
             }
             else
             {

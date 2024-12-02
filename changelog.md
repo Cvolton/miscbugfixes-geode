@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.3.1</c> (2024-12-02)
+* Rebuilt against newer Geode bindings in hopes to fix some more obscure issues
+
 ## <cg>v1.3.0</c> (2024-11-15)
 * <cg>Added</c> <cj>GD 2.207</c> support
 * <cr>Removed</c> <cj>Ignore Damage</c> <co>physics</c> fix
