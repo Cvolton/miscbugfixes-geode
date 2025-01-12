@@ -26,7 +26,7 @@ void cleanUpUninstalledMods() {
         bool modInstalled = true;
 
         // not a mod if this fails, presumably user data saved on accident
-        if(!std::filesystem::exists(modDir / "mod.json", ec) || ec) {
+        if(!(std::filesystem::exists(modDir / "mod.json", ec) || std::filesystem::is_empty(modDir, ec)) || ec) {
             try {
                 log::warn("Found non-mod directory in mods folder: {}", modDir.filename());
             } catch(const std::exception& e) {
