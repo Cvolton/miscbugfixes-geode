@@ -3,17 +3,21 @@
 
 using namespace geode::prelude;
 
-void cleanUpIndexCache() {
-    if(std::filesystem::exists(dirs::getGeodeDir() / "index")) {
-        log::info("Cleaning up old index cache...");
+void removeSubdirIfExists(const std::string& subdir, const std::string& friendlyName) {
+    if(std::filesystem::exists(dirs::getGeodeDir() / subdir)) {
+        log::info("Cleaning up {}...", friendlyName);
         std::error_code ec;
-        std::filesystem::remove_all(dirs::getGeodeDir() / "index", ec);
+        std::filesystem::remove_all(dirs::getGeodeDir() / subdir, ec);
         if(ec) {
-            log::error("Failed to clean up old index cache: {}", ec.message());
+            log::error("Failed to clean up {}: {}", friendlyName, ec.message());
         } else {
-            log::info("Successfully cleaned up old index cache");
+            log::info("Successfully cleaned up {}", friendlyName);
         }
     }
+}
+
+void cleanUpIndexCache() {
+    removeSubdirIfExists("index", "old index cache");
 }
 
 void cleanUpUninstalledMods() {
@@ -57,6 +61,10 @@ void cleanUpUninstalledMods() {
     log::info("Finished cleaning up uninstalled mods");
 }
 
+void cleanUpStaleUpdate() {
+    GEODE_ANDROID(removeSubdirIfExists("update", "stale Geode update binaries"));
+}
+
 $on_mod(Loaded) {
     if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return;
 
@@ -64,6 +72,7 @@ $on_mod(Loaded) {
         thread::setName("CCleaner");
 
         cleanUpIndexCache();
+        cleanUpStaleUpdate();
     }).detach();
 
     MenuLayerManager::queueFunction([](MenuLayer *layer) {
