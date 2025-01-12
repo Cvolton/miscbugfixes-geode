@@ -17,7 +17,7 @@
     "early-load": true,
 	"settings": {
         "practice-mode-title": {
-            "name": "Practice Mode",
+            "name": "Gameplay",
             "type": "title"
         },
 		"practice-mode-show-hitboxes": {
@@ -25,14 +25,19 @@
             "type": "bool",
 			"default": true
         },
-        "other-title": {
-            "name": "Other",
-            "type": "title"
-        },
 		"other-wave-trail-fix": {
             "name": "Fix Player 2 Wave Trail visual bug",
             "type": "bool",
 			"default": true
+        },
+        "other-title": {
+            "name": "Other",
+            "type": "title"
+        },
+        "skip-ccleaner": {
+            "name": "Skip File Cleanup",
+            "type": "bool",
+            "default": false
         }
 	}
 }

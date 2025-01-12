@@ -57,6 +57,8 @@ void cleanUpUninstalledMods() {
 }
 
 $on_mod(Loaded) {
+    if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return;
+    
     std::thread([] {
         thread::setName("CCleaner");
 
@@ -68,7 +70,8 @@ $on_mod(Loaded) {
 class $modify(MenuLayer) {
     bool init() {
         if(!MenuLayer::init()) return false;
-
+        if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return true;
+        
         cleanUpUninstalledMods();
 
         return true;
