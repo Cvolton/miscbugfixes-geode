@@ -159,18 +159,10 @@ class $modify(CustomSongWidget) {
     }
 };*/
 
-class $modify(MenuLayer) {
-    bool init() {
-        if(!MenuLayer::init()) return false;
-
-        static bool loaded = false;
-        if(loaded) return true;
-        loaded = true;
-
+#include "_MenuLayerManager.hpp"
+$on_mod(Loaded) {
+    MenuLayerManager::queueFunction([](MenuLayer*) {
         log::debug("Loading song browser lag fix");
-
         populateDownloadedSongsFast();
-
-        return true;
-    }
-};
+    });
+}

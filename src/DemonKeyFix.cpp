@@ -1,16 +1,10 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/MenuLayer.hpp>
+#include "_MenuLayerManager.hpp"
 
 using namespace geode::prelude;
 
-static bool s_orbFixApplied = false;
-
-class $modify(MenuLayer) {
-    bool init() {
-        if(!MenuLayer::init()) return false;
-
-        if(s_orbFixApplied) return true;
-
+$on_mod(Loaded) {
+    MenuLayerManager::queueFunction([](MenuLayer*) {
         auto total = GameStatsManager::sharedState()->getTotalCollectedCurrency();
         auto old = GameStatsManager::sharedState()->getStat("22");
         auto diff = total - old;
@@ -22,9 +16,5 @@ class $modify(MenuLayer) {
         log::info("Adjusted collected orbs by: {} ({} -> {})", diff, old, total);
         
         GameStatsManager::sharedState()->setStat("22", total);
-
-        s_orbFixApplied = true;
-
-        return true;
-    }
-};
+    });
+}

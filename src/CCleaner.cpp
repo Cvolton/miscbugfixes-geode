@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include "_MenuLayerManager.hpp"
 
 using namespace geode::prelude;
 
@@ -58,22 +59,14 @@ void cleanUpUninstalledMods() {
 
 $on_mod(Loaded) {
     if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return;
-    
+
     std::thread([] {
         thread::setName("CCleaner");
 
         cleanUpIndexCache();
     }).detach();
-}
 
-#include <Geode/modify/MenuLayer.hpp>
-class $modify(MenuLayer) {
-    bool init() {
-        if(!MenuLayer::init()) return false;
-        if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return true;
-        
+    MenuLayerManager::queueFunction([](MenuLayer *layer) {
         cleanUpUninstalledMods();
-
-        return true;
-    }
-};
+    });
+}

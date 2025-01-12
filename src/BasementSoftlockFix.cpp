@@ -1,19 +1,13 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/MenuLayer.hpp>
+#include "_MenuLayerManager.hpp"
 
 using namespace geode::prelude;
 
-static bool s_basementFixChecked = false;
-
-class $modify(MenuLayer) {
-    bool init() {
-        if(!MenuLayer::init()) return false;
-
-        if(s_basementFixChecked) return true;
-
+$on_mod(Loaded) {
+    MenuLayerManager::queueFunction([](MenuLayer *layer) {
         auto GM = GameManager::sharedState();
         if(GM->getUGV("14") && GM->getUGV("15") && GM->getUGV("16") && !GM->getUGV("13")) {
-            Loader::get()->queueInMainThread([this, GM] {
+            Loader::get()->queueInMainThread([layer, GM] {
                 auto popup = createQuickPopup(
                     "Misc Bugfixes",
                     "Basement monster softlock detected!\nYou have collected all keys needed to free the basement monster but it's still stuck.\nFix the issue?",
@@ -27,13 +21,9 @@ class $modify(MenuLayer) {
                     },
                     false
                 );
-                popup->m_scene = this;
+                popup->m_scene = layer;
                 popup->show();
             });
         }
-
-        s_basementFixChecked = true;
-
-        return true;
-    }
-};
+    });
+}
