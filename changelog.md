@@ -1,4 +1,10 @@
 # Changelog
+## <cg>v1.4.0</c> (2025-01-12)
+* <cg>Added</c> <cj>automatic file cleanup</c>
+  * This deletes files that were created by older versions of Geode but are not used for anything anymore
+  * This also deletes old temporary files for uninstalled mods - this does NOT touch your save data
+* <cg>Optimized</c> MenuLayer hooks
+
 ## <cg>v1.3.1</c> (2024-12-02)
 * Rebuilt against newer Geode bindings in hopes to fix some more obscure issues
 
