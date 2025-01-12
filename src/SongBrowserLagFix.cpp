@@ -24,7 +24,7 @@ void populateDownloadedSongsFast() {
 
     auto songPath = GameManager::sharedState()->getGameVariable("0033") ? CCFileUtils::sharedFileUtils()->getWritablePath2() : CCFileUtils::sharedFileUtils()->getWritablePath();
     std::thread([knownSongs, songPath]() {
-        //thread::setName("Song Browser Lag Fix");
+        thread::setName("Song Browser Lag Fix");
 
         std::unique_lock lock(s_populating);
         log::debug("Started populating downloaded songs cache");
