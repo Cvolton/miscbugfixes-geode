@@ -1,4 +1,9 @@
 # Changelog
+## <cg>v1.5.0</c> (2025-03-28)
+* <cg>Fixed</c> a bug that caused the first MenuLayer to be incorrectly retained
+* <cr>Removed</c> <cj>known broken mod versions check</c>
+  * It has served its purpose
+
 ## <cg>v1.4.0</c> (2025-01-14)
 * <cg>Added</c> <cj>automatic file cleanup</c>
   * This deletes files that were created by older versions of Geode but are not used for anything anymore
