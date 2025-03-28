@@ -18,8 +18,6 @@ NTSYSAPI NTSTATUS NTAPI RtlGetVersion(PRTL_OSVERSIONINFOEXW lpVersionInformation
 }
 #endif
 
-static std::optional<web::WebTask> s_requestTask = std::nullopt;
-
 namespace MiscBugfixes {
     // https://www.winehq.org/pipermail/wine-devel/2008-September/069387.html
     std::string getWineVersion() {
@@ -60,36 +58,32 @@ namespace MiscBugfixes {
         #endif
     }
 
-    void onNoticesFailed(CCLayer* layer, const std::string& error = "") {
+    void onNoticesFailed(const std::string& error = "") {
         log::warn("Fetching important notices failed: {}", error);
-        s_requestTask = std::nullopt;
-        layer->release();
     }
 
     std::string getUserAgent() {
         return fmt::format("Misc Bugfixes {} / Geode {}", Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true));
     }
 
-    void loadImportantNotices(CCLayer* layer) {
+    void loadImportantNotices(Ref<CCLayer> layer) {
         static bool hasBeenCalled = false;
         if(hasBeenCalled) return;
         hasBeenCalled = true;
 
-        layer->retain();
-
         auto url = fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true), getWineVersion(), getOSVersion());
         log::info("Fetching important notices from: {}", url);
 
-        s_requestTask = web::WebRequest().userAgent(getUserAgent()).get(url).map(
+        web::WebRequest().userAgent(getUserAgent()).get(url).listen(
             [layer](web::WebResponse* response) {
                 if(!response->ok()) {
-                    onNoticesFailed(layer, std::to_string(response->code()));
+                    onNoticesFailed(std::to_string(response->code()));
                     return *response;
                 }
 
                 auto result = response->json();
                 if(!result) {
-                    onNoticesFailed(layer, "Invalid JSON");
+                    onNoticesFailed("Invalid JSON");
                     return *response;
                 }
 
@@ -102,10 +96,7 @@ namespace MiscBugfixes {
                     auto alert = FLAlertLayer::create(Mod::get()->getName().c_str(), res.unwrap(), "OK");
                     alert->m_scene = layer;
                     alert->show();
-                    layer->release();
                 }
-
-                s_requestTask = std::nullopt;
 
                 return *response;
             }
