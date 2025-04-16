@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 
-#ifdef GEODE_IS_ANDROID
+#ifdef GEODE_IS_MOBILE
 
 #include <Geode/modify/InfoLayer.hpp>
 #include <Geode/modify/ProfilePage.hpp>
