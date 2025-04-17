@@ -1,6 +1,9 @@
 # Changelog
+## <cg>v1.5.3</c> (2025-04-18)
+* <cg>Enabled</c> <cj>Copy to Clipboard fix</c> on <cp>iOS</c>
+
 ## <cg>v1.5.1 & v1.5.2</c> (2025-04-11)
-* <cg>Added</c> <cp>Sapphire SDK</c> support
+* <cg>Added</c> <cp>iOS</c> support
 
 ## <cg>v1.5.0</c> (2025-03-28)
 * <cg>Fixed</c> a bug that caused the first MenuLayer to be incorrectly retained
