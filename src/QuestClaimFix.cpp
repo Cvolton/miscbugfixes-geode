@@ -8,7 +8,7 @@ class $modify(GameStatsManager) {
         GameStatsManager::dataLoaded(dict);
 
         for(auto [key, quest] : CCDictionaryExt<gd::string, GJChallengeItem*>(this->m_activeChallenges)) {
-            if(quest->m_count >= quest->m_goal) quest->m_canClaim = true;
+            quest->m_canClaim = quest->m_count >= quest->m_goal
         }
     }
 };
