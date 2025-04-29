@@ -75,6 +75,9 @@ When a list contains a deleted level, an empty record is sent in its place. This
 
 A proper fix for this issue would be to resolve the issue server-side. The workaround in this mod is that when loading list levels fails, it tries to load them with the method used for loading levels in a created list instead.
 
+#### <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c>
+When you Load a save file with a quest that's already in your local save and the cloud save has it completed but not claimed, the progress will transfer to your client but the "can claim" status only unfreezes after you collect an additional item required for the quest. The bugfix makes the status refresh instantly.
+
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
 
