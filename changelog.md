@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.6.0</c> (2025-04-30)
+* <cg>Added</c> <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c> fix
+
 ## <cg>v1.5.3</c> (2025-04-18)
 * <cg>Enabled</c> <cj>Copy to Clipboard fix</c> on <cp>iOS</c>
 
