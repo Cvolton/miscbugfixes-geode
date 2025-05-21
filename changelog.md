@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.6.2</c> (2025-05-21)
+* <cg>Fixed</c> a bug where refreshing level lists with no working levels blanked the page
+
 ## <cg>v1.6.0 & v1.6.1</c> (2025-04-30)
 * <cg>Added</c> <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c> fix
 
