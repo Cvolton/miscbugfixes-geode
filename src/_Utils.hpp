@@ -28,3 +28,8 @@ inline void resetUpdater(const std::string& versionString) {
     auto info = VersionInfo::parse(versionString);
     if(info.isOk()) resetUpdater(info.unwrap());
 }
+
+namespace MiscBugfixes {
+    bool isAmazon();
+    void setAmazon(bool isAmazon);
+}

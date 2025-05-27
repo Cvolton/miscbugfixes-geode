@@ -1,4 +1,5 @@
 #include "_MenuLayerManager.hpp"
+#include "_Utils.hpp"
 #include <Geode/Geode.hpp>
 
 using namespace geode::prelude;
@@ -23,6 +24,17 @@ class $modify(MenuLayer) {
             func(this);
         }
         s_functionQueue.clear();
+
+        if(MiscBugfixes::isAmazon()) {
+            auto alert = FLAlertLayer::create(
+                "Amazon Bug",
+                "This version of Geometry Dash is not supported by Geode. "
+                "Please use the official version from the Google Play Store.",
+                "OK"
+            );
+            alert->m_scene = this;
+            alert->show();
+        }
 
         //disabled for now
         /*std::thread([this] {
