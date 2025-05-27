@@ -1,5 +1,15 @@
 #pragma once
 
+#ifdef GEODE_IS_WINDOWS
+    #ifdef CVOLTON_MISCBUGFIXES_EXPORTING
+        #define MISCBUGFIXES_DLL __declspec(dllexport)
+    #else
+        #define MISCBUGFIXES_DLL __declspec(dllimport)
+    #endif
+#else
+    #define MISCBUGFIXES_DLL __attribute__((visibility("default")))
+#endif
+
 #include <Geode/Geode.hpp>
 
 using namespace geode::prelude;
@@ -30,6 +40,6 @@ inline void resetUpdater(const std::string& versionString) {
 }
 
 namespace MiscBugfixes {
-    bool isAmazon();
+    bool MISCBUGFIXES_DLL isAmazon();
     void setAmazon(bool isAmazon);
 }

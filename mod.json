@@ -1,6 +1,6 @@
 {
-	"geode": "4.4.0",
-	"version": "v1.6.3",
+	"geode": "4.5.0",
+	"version": "v1.6.4",
 	"gd": {
         "win": "2.2074",
         "android": "2.2074",
@@ -40,5 +40,10 @@
             "type": "bool",
             "default": false
         }
+	},
+	"api": {
+		"include": [
+			"src/_Utils.hpp"
+		]
 	}
 }

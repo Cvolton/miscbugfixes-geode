@@ -25,17 +25,6 @@ class $modify(MenuLayer) {
         }
         s_functionQueue.clear();
 
-        if(MiscBugfixes::isAmazon()) {
-            auto alert = FLAlertLayer::create(
-                "Amazon Bug",
-                "This version of Geometry Dash is not supported by Geode. "
-                "Please use the official version from the Google Play Store.",
-                "OK"
-            );
-            alert->m_scene = this;
-            alert->show();
-        }
-
         //disabled for now
         /*std::thread([this] {
             thread::setName("MenuLayerManager");

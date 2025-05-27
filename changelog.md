@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.6.4</c> (2025-05-27)
+* <cg>Improved</c> support for <cp>Amazon</c> versions of the game
+
 ## <cg>v1.6.2 & v1.6.3</c> (2025-05-21)
 * <cg>Fixed</c> a bug where refreshing level lists with no working levels blanked the page
 
