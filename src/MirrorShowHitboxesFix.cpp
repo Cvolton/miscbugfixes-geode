@@ -5,22 +5,14 @@
 #include <Geode/modify/CCDrawNode.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
 #include <Geode/modify/GameObject.hpp>
+#include "_Utils.hpp"
 
 using namespace geode::prelude;
 
 static bool s_insideDebugUpdate = false;
-static bool s_shouldApplyPhysicsFix = false;
 
 // init
-$on_mod(Loaded) {
-    listenForSettingChanges("practice-mode-show-hitboxes", +[](bool value) {
-        s_shouldApplyPhysicsFix = value;
-    });
-}
-
-$on_mod(DataLoaded) {
-    s_shouldApplyPhysicsFix = Mod::get()->getSettingValue<bool>("practice-mode-show-hitboxes");
-}
+STATIC_BOOL_SETTING(shouldApplyPhysicsFix, practice-mode-show-hitboxes);
 
 // mirrored hitboxes invisible fix
 class $modify(cocos2d::CCDrawNode) {

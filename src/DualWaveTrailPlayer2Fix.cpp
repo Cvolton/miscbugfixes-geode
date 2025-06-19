@@ -1,19 +1,10 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
+#include "_Utils.hpp"
 
 using namespace geode::prelude;
 
-static bool s_shouldApplyWaveTrailFix = false;
-
-$on_mod(Loaded) {
-    listenForSettingChanges("other-wave-trail-fix", +[](bool value) {
-        s_shouldApplyWaveTrailFix = value;
-    });
-}
-
-$on_mod(DataLoaded) {
-    s_shouldApplyWaveTrailFix = Mod::get()->getSettingValue<bool>("other-wave-trail-fix");
-}
+STATIC_BOOL_SETTING(shouldApplyWaveTrailFix, other-wave-trail-fix);
 
 class $modify(GJBaseGameLayer) {
 

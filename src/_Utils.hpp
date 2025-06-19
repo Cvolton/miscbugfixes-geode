@@ -43,3 +43,12 @@ namespace MiscBugfixes {
     bool MISCBUGFIXES_DLL isAmazon();
     void setAmazon(bool isAmazon);
 }
+
+#define STATIC_BOOL_SETTING(name, jsonName) \
+    static bool s_##name = false; \
+    $on_mod(DataLoaded) { \
+        s_##name = Mod::get()->getSettingValue<bool>(#jsonName); \
+        listenForSettingChanges(#jsonName, +[](bool value) { \
+            s_##name = value; \
+        }); \
+    }
