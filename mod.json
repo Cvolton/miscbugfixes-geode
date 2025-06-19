@@ -31,6 +31,11 @@
             "type": "bool",
 			"default": true
         },
+		"enforce-start-pos-mirror-mode": {
+            "name": "Fix Start Pos Mirror Mode Being Ignored",
+            "type": "bool",
+			"default": true
+        },
         "other-title": {
             "name": "Other",
             "type": "title"
