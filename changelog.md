@@ -1,4 +1,8 @@
 # Changelog
+## <cg>v1.7.0</c> (2025-06-19)
+* <cg>Added</c> <cj>Mirror Mode</c> not working in <co>Start Positions</c> fix
+- <cg>Added</c> <cj>Mini Swing</c> getting visually changed to <cr>Cube</c> if <co>Default Mini Icon</c> is on fix
+
 ## <cg>v1.6.4</c> (2025-05-27)
 * <cg>Improved</c> support for <cp>Amazon</c> versions of the game
 

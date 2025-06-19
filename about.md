@@ -2,9 +2,12 @@
 The 2.2075 before actual 2.2075...
 
 ## Fixed bugs:
-### Practice Mode
+### Practice Mode (optional)
 - <cj>Show Hitboxes</c> not working with <co>mirror portals</c>
 - <cj>Show Hitboxes</c> changing <cl>physics</c> during <co>mirror portal transitions</c>
+### Gameplay/Visual (optional)
+- <cj>Mirror Mode</c> not working in <co>Start Positions</c>
+- <cj>Mini Swing</c> getting visually changed to <cr>Cube</c> if <co>Default Mini Icon</c> is on
 ### Other
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c>, not on restart!
@@ -24,3 +27,4 @@ For a technical breakdown of the fixed bugs see [readme.md](https://github.com/C
 ## Special Thanks
 - Prevter: Contributed both Show Hitboxes fixes
 - NyteLyte: Contributed the Wave trail fix
+- Erymanthus: Contributed Mirror Mode Start Pos and Mini Swing Cube fixes

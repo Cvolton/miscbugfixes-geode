@@ -78,6 +78,12 @@ A proper fix for this issue would be to resolve the issue server-side. The worka
 #### <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c>
 When you Load a save file with a quest that's already in your local save and the cloud save has it completed but not claimed, the progress will transfer to your client but the "can claim" status only unfreezes after you collect an additional item required for the quest. The bugfix makes the status refresh instantly.
 
+#### <cj>Mirror Mode</c> not working in <co>Start Positions</c>
+The option just doesn't do anything in vanilla I think
+
+#### <cj>Mini Swing</c> getting visually changed to <cr>Cube</c> if <co>Default Mini Icon</c> is on
+The code forcing the default mini icon on doesn't check if you're a swing - the fix here sets it back to the correct swing after vanilla changes it to the cube, but a more proper solution for a vanilla fix would be checking directly when the cube is forced to begin with.
+
 ### Bugs not listed in about.md
 These bugs are not listed in about.md, as their relevance to the end user is minimal, or they can be considered part of another bugfix. Despite that, this mod still patches them.
 
