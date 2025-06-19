@@ -32,7 +32,12 @@
 			"default": true
         },
 		"enforce-start-pos-mirror-mode": {
-            "name": "Fix Start Pos Mirror Mode Being Ignored",
+            "name": "Fix Start Pos Mirror Mode being ignored",
+            "type": "bool",
+			"default": true
+        },
+		"fix-mini-swing": {
+            "name": "Fix Mini Swing showing Cube instead with Default Icon enabled",
             "type": "bool",
 			"default": true
         },
