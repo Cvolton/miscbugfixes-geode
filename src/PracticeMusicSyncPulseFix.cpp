@@ -1,5 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/AudioEffectsLayer.hpp>
+#include "_Utils.hpp"
 
 using namespace geode::prelude;
 
