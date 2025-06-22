@@ -3,7 +3,7 @@
 
 using namespace geode::prelude;
 
-STATIC_BOOL_SETTING(fixDashParticlesOffset, fix-dash-particles-offset);
+STATIC_BOOL_SETTING(dashParticlesOffsetFix, dash-particles-offset-fix);
 
 class $modify(PlayerObject) {
     $override void setPosition(const CCPoint& position) {
@@ -11,7 +11,7 @@ class $modify(PlayerObject) {
         // 2.2 changed this to the position of m_trailingParticles
         // which are used for ship and ufo click particles
         // this fix reverts this to the 2.113 behavior
-        if (s_fixDashParticlesOffset)
+        if (s_dashParticlesOffsetFix)
             m_dashParticles->setPosition(position);
     }
 };
