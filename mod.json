@@ -41,6 +41,12 @@
             "type": "bool",
 			"default": true
         },
+        "show-trigger-wave-particles-fix": {
+            "name": "Fix Wave particles after Show trigger",
+            "description": "Fix Wave showing Ship/Ufo fire particles after hiding and showing the icon with Hide/Show triggers",
+            "type": "bool",
+            "default": true
+        },
         "other-title": {
             "name": "Other",
             "type": "title"
