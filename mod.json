@@ -41,6 +41,11 @@
             "type": "bool",
 			"default": true
         },
+        "practice-music-sync-pulse-fix": {
+            "name": "Fix pulsing objects with Practice Music Sync",
+            "type": "bool",
+            "default": true
+        },
         "other-title": {
             "name": "Other",
             "type": "title"
