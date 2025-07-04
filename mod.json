@@ -46,6 +46,11 @@
             "type": "bool",
             "default": true
         },
+        "dash-particles-offset-fix": {
+            "name": "Fix dash orb particles being incorrectly offset",
+            "type": "bool",
+            "default": true
+        },
         "other-title": {
             "name": "Other",
             "type": "title"
