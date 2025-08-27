@@ -34,3 +34,5 @@ For a technical breakdown of the fixed bugs see [readme.md](https://github.com/C
 - Prevter: Contributed both Show Hitboxes fixes
 - NyteLyte: Contributed the Wave trail fix
 - Erymanthus: Contributed Mirror Mode Start Pos and Mini Swing Cube fixes
+- ConfiG: Contributed Dash Orb Particles, Robot Head, Music Pulse and Show Trigger Wave Particles fixes
+- Hbg1010: Contributed the Font Selection Highlight fix
