@@ -7,7 +7,13 @@ The 2.2075 before actual 2.2075...
 - <cj>Show Hitboxes</c> changing <cl>physics</c> during <co>mirror portal transitions</c>
 ### Gameplay/Visual (optional)
 - <cj>Mirror Mode</c> not working in <co>Start Positions</c>
-- <cj>Mini Swing</c> getting visually changed to <cr>Cube</c> if <co>Default Mini Icon</c> is on
+- <cj>Mini Swing</c> visually becoming <cr>Cube</c> if <co>Default Mini Icon</c> is on
+- <cj>Dash Orb Particles</c> being <cr>incorrectly offset</c>
+- <cj>Spider and Robot Heads</c> sometimes being <cr>incorrectly offset</c>
+- <cj>Music Pulse</c> not working in <co>Practice Mode</c> with Music Unlocker
+- <cj>Show Trigger</c> incorrectly showing <co>Wave Particles</c>
+### Editor
+- <cj>Font Selection Highlight</c> <cr>disappearing</c> after <co>changing fonts</c>
 ### Other
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c>, not on restart!

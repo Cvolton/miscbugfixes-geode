@@ -1,4 +1,14 @@
 # Changelog
+## <cg>v1.8.0</c> (2025-08-27)
+* <cg>Added</c> <cj>fixes</c> for the following <cr>bugs</c>
+  - <cj>Dash Orb Particles</c> being <cr>incorrectly offset</c>
+  - <cj>Spider and Robot Heads</c> sometimes being <cr>incorrectly offset</c>
+  - <cj>Music Pulse</c> not working in <co>Practice Mode</c> with Music Unlocker
+  - <cj>Show Trigger</c> incorrectly showing <co>Wave Particles</c>
+  - <cj>Font Selection Highlight</c> <cr>disappearing</c> after <co>changing fonts</c>
+    - Note: This fix doesn't work with BetterEdit enabled (the bug remains, as BE reimplements the behavior)
+* <cg>Added</c> <cp>iOS Jitless</c> support
+
 ## <cg>v1.7.0</c> (2025-06-19)
 * <cg>Added</c> <cj>Mirror Mode</c> not working in <co>Start Positions</c> fix
 - <cg>Added</c> <cj>Mini Swing</c> getting visually changed to <cr>Cube</c> if <co>Default Mini Icon</c> is on fix
