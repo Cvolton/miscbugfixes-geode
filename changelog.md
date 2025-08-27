@@ -1,11 +1,11 @@
 # Changelog
 ## <cg>v1.8.0</c> (2025-08-27)
 * <cg>Added</c> <cj>fixes</c> for the following <cr>bugs</c>
-  - <cj>Dash Orb Particles</c> being <cr>incorrectly offset</c>
-  - <cj>Spider and Robot Heads</c> sometimes being <cr>incorrectly offset</c>
-  - <cj>Music Pulse</c> not working in <co>Practice Mode</c> with Music Unlocker
-  - <cj>Show Trigger</c> incorrectly showing <co>Wave Particles</c>
-  - <cj>Font Selection Highlight</c> <cr>disappearing</c> after <co>changing fonts</c>
+  - <cj>Dash Orb Particles</c> being <cr>incorrectly offset</c> (thanks ConfiG)
+  - <cj>Spider and Robot Heads</c> sometimes being <cr>incorrectly offset</c> (thanks ConfiG)
+  - <cj>Music Pulse</c> not working in <co>Practice Mode</c> with Music Unlocker (thanks ConfiG)
+  - <cj>Show Trigger</c> incorrectly showing <co>Wave Particles</c> (thanks ConfiG)
+  - <cj>Font Selection Highlight</c> <cr>disappearing</c> after <co>changing fonts</c> (thanks Hbg1010)
     - Note: This fix doesn't work with BetterEdit enabled (the bug remains, as BE reimplements the behavior)
 * <cg>Added</c> <cp>iOS Jitless</c> support
 

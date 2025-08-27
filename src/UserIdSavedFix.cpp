@@ -35,12 +35,15 @@ $execute {
         );
     #elif defined(GEODE_IS_IOS)
         static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
+        if(Loader::get()->isPatchless()) return; // Jitless would crash here
         // NOP out CBZ
         auto result = patch(
             0xb267c,
             {0x15, 0x01, 0x00, 0x34},
             {0x1F, 0x20, 0x03, 0xD5}
         );
+
+        GEODE_MOD_STATIC_PATCH(0xb267c, {0x1F, 0x20, 0x03, 0xD5});
     #elif defined(GEODE_IS_ANDROID32)
         static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
         // NOP out CBZ

@@ -63,7 +63,7 @@ namespace MiscBugfixes {
         if(hasBeenCalled) return;
         hasBeenCalled = true;
 
-        auto url = fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}&amazon={}", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true), getWineVersion(), getOSVersion(), MiscBugfixes::isAmazon() ? "1" : "0");
+        auto url = fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}&amazon={}", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true), getWineVersion(), getOSVersion(), (MiscBugfixes::isAmazon() || Loader::get()->isPatchless()) ? "1" : "0");
         log::info("Fetching important notices from: {}", url);
 
         web::WebRequest().userAgent(getUserAgent()).get(url).listen(
