@@ -22,7 +22,7 @@ void populateDownloadedSongsFast() {
         }
     }*/
 
-    auto songPath = GameManager::sharedState()->getGameVariable("0033") ? CCFileUtils::sharedFileUtils()->getWritablePath2() : CCFileUtils::sharedFileUtils()->getWritablePath();
+    std::string songPath = GameManager::sharedState()->getGameVariable("0033") ? CCFileUtils::sharedFileUtils()->getWritablePath2() : CCFileUtils::sharedFileUtils()->getWritablePath();
     std::thread([knownSongs, songPath]() {
         thread::setName("Song Browser Lag Fix");
 
