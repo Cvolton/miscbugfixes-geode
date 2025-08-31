@@ -15,22 +15,27 @@ static inline std::shared_mutex s_populating;
 void populateDownloadedSongsFast() {
     auto MDM = MusicDownloadManager::sharedState();
     std::vector<int> knownSongs;
-    auto dict = CCDictionaryExt<std::string, CCString*>(MDM->m_songObjects);
+    /*auto dict = CCDictionaryExt<std::string, CCString*>(MDM->m_songObjects);
     for(auto [id, song] : dict) {
         if(auto result = utils::numFromString<int>(id)) {
             knownSongs.push_back(result.unwrap());
         }
-    }
+    }*/
 
     auto songPath = GameManager::sharedState()->getGameVariable("0033") ? CCFileUtils::sharedFileUtils()->getWritablePath2() : CCFileUtils::sharedFileUtils()->getWritablePath();
     std::thread([knownSongs, songPath]() {
         thread::setName("Song Browser Lag Fix");
 
         std::unique_lock lock(s_populating);
+        std::error_code ec;
         log::debug("Started populating downloaded songs cache");
-        for(auto song : knownSongs) {
-            if(std::filesystem::exists(fmt::format("{}/{}.mp3", std::string(songPath), song))) {
-                s_downloadedSongs[song] = true;
+        for (const auto & entry : std::filesystem::directory_iterator(songPath, ec)) {
+            if(entry.is_regular_file()) {
+                auto filename = utils::string::pathToString(entry.path().filename());
+                if(filename.size() > 4 && filename.substr(filename.size() - 4) == ".mp3") {
+                    auto id = utils::numFromString<int>(filename.substr(0, filename.size() - 4));
+                    if(id) s_downloadedSongs[id.unwrap()] = true;
+                }
             }
         }
         log::debug("Finished populating downloaded songs cache");
