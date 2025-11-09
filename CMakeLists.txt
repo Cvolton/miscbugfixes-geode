@@ -10,7 +10,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(MiscBugfixes VERSION 1.0.0)
 
-file(GLOB_RECURSE SOURCES
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 	src/*.cpp
 )
 
