@@ -14,20 +14,17 @@ class $modify(PlayerObject) {
     // so lets hope calling it here doesnt break anything (:
 
     $override void toggleRobotMode(bool on, bool start) {
-        if (on)
-            return PlayerObject::toggleRobotMode(on, start);
-        if (!m_isRobot)
+        if (on || !m_isRobot)
             return PlayerObject::toggleRobotMode(on, start);
         PlayerObject::toggleRobotMode(on, start);
         this->resetPlayerIcon();
     }
 
     $override void toggleRollMode(bool on, bool start) {
-        if (on)
-            return PlayerObject::toggleRollMode(on, start);
-        if (!m_isBall)
+        if (on || !m_isBall)
             return PlayerObject::toggleRollMode(on, start);
         PlayerObject::toggleRollMode(on, start);
         this->resetPlayerIcon();
     }
 };
+
