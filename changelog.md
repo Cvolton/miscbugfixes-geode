@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.9.0</c> (2025-11-29)
+* <cg>Added</c> <cj>Glow Color</c> not working in <co>Leaderboards</c> fix
+
 ## <cg>v1.8.0</c> (2025-08-27)
 * <cg>Added</c> <cj>fixes</c> for the following <cr>bugs</c>
   - <cj>Dash Orb Particles</c> being <cr>incorrectly offset</c> (thanks ConfiG)

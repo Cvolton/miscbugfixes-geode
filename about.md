@@ -25,6 +25,7 @@ The 2.2075 before actual 2.2075...
 - <cj>Lists</c> containing <cr>deleted levels</c> not being playable
 - <cj>Basement monster</c> <cr>softlock</c>
 - <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c>
+- <cj>Glow Color</c> not working in <co>Leaderboards</c>
 - A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at once
 - <cr>"12 days left"</c> timer bug
 
