@@ -12,7 +12,7 @@ class $modify(GJScoreCell) {
 		if (!simplePlayer)
 			return;
         
-        if (simplePlayer->m_hasGlowOutline) // GJUserScore::m_glowEnabled is always false, so this is the next best thing
+        if (score->m_special == 2 && score->m_color3 >= 0)
 		    simplePlayer->setGlowOutline(GameManager::get()->colorForIdx(score->m_color3));
 	}
 };
@@ -25,7 +25,7 @@ class $modify(CommentCell) {
 		if (!simplePlayer)
 			return;
 		
-        if (simplePlayer->m_hasGlowOutline)
+        if (comment->m_userScore->m_special == 2 && comment->m_userScore->m_color3 >= 0)
             simplePlayer->setGlowOutline(GameManager::get()->colorForIdx(comment->m_userScore->m_color3));
 	}
 };
