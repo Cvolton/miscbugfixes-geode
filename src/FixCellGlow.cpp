@@ -12,7 +12,7 @@ class $modify(GJScoreCell) {
 		if (!simplePlayer)
 			return;
         
-        if (score->m_special == 2 && score->m_color3 >= 0)
+        if (score->m_special == 2 && score->m_color3 > 0)
 		    simplePlayer->setGlowOutline(GameManager::get()->colorForIdx(score->m_color3));
 	}
 };
@@ -25,7 +25,7 @@ class $modify(CommentCell) {
 		if (!simplePlayer)
 			return;
 		
-        if (comment->m_userScore->m_special == 2 && comment->m_userScore->m_color3 >= 0)
+        if (comment->m_userScore->m_special == 2 && comment->m_userScore->m_color3 > 0)
             simplePlayer->setGlowOutline(GameManager::get()->colorForIdx(comment->m_userScore->m_color3));
 	}
 };
