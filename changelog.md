@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.9.1</c> (2025-12-14)
+* <cg>Fixed</c> an oversight causing <cj>Glow Color</c> to be displayed incorrectly for <co>pre-2.2 accounts</c>
+
 ## <cg>v1.9.0</c> (2025-11-29)
 * <cg>Added</c> <cj>Glow Color</c> not working in <co>Leaderboards</c> fix
 
