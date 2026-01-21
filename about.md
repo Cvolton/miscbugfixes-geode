@@ -10,7 +10,6 @@ The 2.2075 before actual 2.2075...
 - <cj>Mini Swing</c> visually becoming <cr>Cube</c> if <co>Default Mini Icon</c> is on
 - <cj>Dash Orb Particles</c> being <cr>incorrectly offset</c>
 - <cj>Spider and Robot Heads</c> sometimes being <cr>incorrectly offset</c>
-- <cj>Music Pulse</c> not working in <co>Practice Mode</c> with Music Unlocker
 - <cj>Show Trigger</c> incorrectly showing <co>Wave Particles</c>
 ### Editor
 - <cj>Font Selection Highlight</c> <cr>disappearing</c> after <co>changing fonts</c>
@@ -25,7 +24,6 @@ The 2.2075 before actual 2.2075...
 - <cj>Lists</c> containing <cr>deleted levels</c> not being playable
 - <cj>Basement monster</c> <cr>softlock</c>
 - <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c>
-- <cj>Glow Color</c> not working in <co>Leaderboards</c>
 - A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at once
 - <cr>"12 days left"</c> timer bug
 
