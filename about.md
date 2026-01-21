@@ -21,7 +21,6 @@ The 2.2075 before actual 2.2075...
 - <cj>Saved Songs</c> page switching <cr>lag</c>
 - <cj>Profiles</c> showing <cr>old/broken</c> usernames
 - <cj>"My Lists" Search</c> showing <cr>incorrect usernames</c>
-- <cj>Lists</c> containing <cr>deleted levels</c> not being playable
 - <cj>Basement monster</c> <cr>softlock</c>
 - <cj>Completed Quests</c> getting stuck as <cr>unclaimable</c>
 - A <cr>crash</c> caused by <cj>refreshing and liking</c> <co>comments</c> at once
