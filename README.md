@@ -14,9 +14,6 @@ Note that it seems that Rob is already somewhat doing this as part of the game's
 
 Also the fixed value persists even after uninstalling the mod, however the differences are saved in the mod's saved.json (if any are applied), so you can loop through the array there and substract all of the numbers from GS_22 to restore the original value.
 
-#### <cj>Copy to Clipboard</c> not working (Android only)
-This is simply an unimplemented feature on Android. The fix adds it to the game.
-
 #### <cj>Saved Songs</c> page switching <cr>lag</c>
 Whenever you switch pages in Saved Songs, the game checks if all songs in your save file are downloaded. If you have a lot of downloaded songs or a lot of saved levels, this can take quite a while, as it can result in thousands of disk accesses on every page load.
 
@@ -131,3 +128,8 @@ To avoid illegitimate noclip hacks, the game has an anticheat measure, where aft
 The fix forces a death by the anticheat spike when you spawn into a level with ignore damage enabled to make sure the anticheat passed flag is set correctly.
 
 This bug was fixed by RobTop in update 2.207.
+
+### <cj>Copy to Clipboard</c> not working (Android only)
+This is simply an unimplemented feature on Android. The fix adds it to the game.
+
+This bug was fixed by RobTop in update 2.208.

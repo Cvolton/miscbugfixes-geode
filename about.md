@@ -17,7 +17,6 @@ The 2.2075 before actual 2.2075...
 - <cr>Incorrect</c> <cj>Total Orbs Collected</c>
   - <co>Demon Keys</c> are now awarded <cg>immediately</c>, not on restart!
 - <cj>Wave trail</c> <cr>teleporting</c> when <co>player 2</c> enters a single portal
-- <cj>Copy to Clipboard</c> not working (mobile only)
 - <cj>Saved Songs</c> page switching <cr>lag</c>
 - <cj>Profiles</c> showing <cr>old/broken</c> usernames
 - <cj>"My Lists" Search</c> showing <cr>incorrect usernames</c>
