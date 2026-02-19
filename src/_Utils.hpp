@@ -48,7 +48,7 @@ namespace MiscBugfixes {
     static bool s_##name = false; \
     $on_mod(DataLoaded) { \
         s_##name = Mod::get()->getSettingValue<bool>(#jsonName); \
-        listenForSettingChanges(#jsonName, +[](bool value) { \
+        listenForSettingChanges<bool>(#jsonName, +[](bool value) { \
             s_##name = value; \
         }); \
     }

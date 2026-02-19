@@ -122,8 +122,8 @@ $execute {
      * This is proven by Android behavior, where this trim does not happen.
     */
     #ifdef GEODE_IS_WINDOWS
-        static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
-        nopWindowsMulti({0x3760bc, 0x085a06, 0x03cf16, 0x38c659, 0x38c799, 0x2d041f, 0x0ce160, 0x147be5, 0x1666d0, 0x167038, 0x16708c, 0x3b6506, 0x147d6e, 0x27b975, 0x147eb2});
+        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
+        nopWindowsMulti({0x38be2c, 0x3a34a9, 0x3a35e9, 0x085a56, 0x03cf56, 0x149ce5, 0x0cf590, 0x149e6e, 0x169120, 0x169a88, 0x169adc, 0x2832a5, 0x149fb2, 0x3cd876});
         //nopWindows2(0x00000, "GetGJDailyLevelState finished; its the callback in handleIt");
     #elif defined(GEODE_IS_INTEL_MAC)
         static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");

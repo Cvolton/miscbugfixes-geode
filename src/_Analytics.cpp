@@ -24,11 +24,7 @@ namespace MiscBugfixes {
             {
                 return fmt::format("Wine%20{}", pwine_get_version());
             }
-            else
-            {
-                return "";
-            }
-            return 0;
+            return "";
 
         #else
         return "";
@@ -65,18 +61,18 @@ namespace MiscBugfixes {
 
         auto url = fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}&amazon={}", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true), getWineVersion(), getOSVersion(), (MiscBugfixes::isAmazon() || Loader::get()->isPatchless()) ? "1" : "0");
         log::info("Fetching important notices from: {}", url);
-
-        web::WebRequest().userAgent(getUserAgent()).get(url).listen(
-            [layer](web::WebResponse* response) {
-                if(!response->ok()) {
-                    onNoticesFailed(std::to_string(response->code()));
-                    return *response;
+        async::spawn(
+            web::WebRequest().userAgent(getUserAgent()).get(url),
+            [layer](web::WebResponse response) {
+                if(!response.ok()) {
+                    onNoticesFailed(std::to_string(response.code()));
+                    return;
                 }
 
-                auto result = response->json();
+                auto result = response.json();
                 if(!result) {
                     onNoticesFailed("Invalid JSON");
-                    return *response;
+                    return;
                 }
 
                 auto info = result.unwrap();
@@ -89,8 +85,6 @@ namespace MiscBugfixes {
                     alert->m_scene = layer;
                     alert->show();
                 }
-
-                return *response;
             }
         );
     }
