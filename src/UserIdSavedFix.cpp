@@ -26,7 +26,7 @@ $execute {
             {0x74, 0x00}
         );
     #elif defined(GEODE_IS_ARM_MAC)
-        static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         // NOP out CBZ
         auto result = patch(
             0x4ae684,
@@ -45,20 +45,13 @@ $execute {
 
         GEODE_MOD_STATIC_PATCH(0xaf238, {0x1F, 0x20, 0x03, 0xD5});
     #elif defined(GEODE_IS_ANDROID32)
-        static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         // NOP out CBZ
         auto result = patch(
-            0x3B8F48,
+            0x3C8136,
             {0x56, 0xb1},
             {0x00, 0xbf}
         );
-        
-        auto result2 = patch(
-            0x3B8EC0,
-            {0x56, 0xb1},
-            {0x00, 0xbf}
-        );
-        MiscBugfixes::setAmazon(result2.isOk());
     #elif defined(GEODE_IS_ANDROID64)
         static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
         //patch CBNZ to B
@@ -67,13 +60,6 @@ $execute {
             {0xf6, 0x30, 0x00, 0x35},
             {0x87, 0x01, 0x00, 0x14}
         );
-
-        auto result2 = patch(
-            0x6F0BA4,
-            {0xf6, 0x30, 0x00, 0x35},
-            {0x87, 0x01, 0x00, 0x14}
-        );
-        MiscBugfixes::setAmazon(result2.isOk());
     #else
         static_assert(false, "Unsupported platform");
     #endif
