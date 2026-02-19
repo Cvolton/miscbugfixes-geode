@@ -29,7 +29,7 @@ $execute {
         static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
         // NOP out CBZ
         auto result = patch(
-            0x4a1140,
+            0x4ae684,
             {0x15, 0x01, 0x00, 0x34},
             {0x1F, 0x20, 0x03, 0xD5}
         );
