@@ -14,7 +14,7 @@
 
 using namespace geode::prelude;
 
-inline Result<Patch*> patch(size_t address, std::initializer_list<uint8_t> expected, std::initializer_list<uint8_t> replacement) {
+inline Result<Patch*> patch(size_t address, ByteVector expected, ByteVector replacement) {
     auto offset = reinterpret_cast<uint8_t*>(base::get() + address);
     for(size_t i = 0; i < expected.size(); i++) {
         if(offset[i] != *(expected.begin() + i)) {

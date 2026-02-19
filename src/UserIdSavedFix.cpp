@@ -10,10 +10,10 @@ $execute {
     //
     // Patched function: GJGameLevel::encodeWithCoder
     #ifdef GEODE_IS_WINDOWS
-        static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         //patch JZ to jump by 0 bytes
         auto result = patch(
-            0x16c6bf,
+            0x16f58b,
             {0x74, 0x1e},
             {0x74, 0x00}
         );
