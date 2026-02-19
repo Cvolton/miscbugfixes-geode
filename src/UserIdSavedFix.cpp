@@ -18,10 +18,10 @@ $execute {
             {0x74, 0x00}
         );
     #elif defined(GEODE_IS_INTEL_MAC)
-        static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         //patch JZ to jump by 0 bytes
         auto result = patch(
-            0x5488a6,
+            0x55f07c,
             {0x74, 0x1d},
             {0x74, 0x00}
         );
