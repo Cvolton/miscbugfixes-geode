@@ -53,10 +53,10 @@ $execute {
             {0x00, 0xbf}
         );
     #elif defined(GEODE_IS_ANDROID64)
-        static_assert(GEODE_COMP_GD_VERSION == 22074, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         //patch CBNZ to B
         auto result = patch(
-            0x6EFF34,
+            0x7091C0,
             {0xf6, 0x30, 0x00, 0x35},
             {0x87, 0x01, 0x00, 0x14}
         );
