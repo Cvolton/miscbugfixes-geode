@@ -10,7 +10,7 @@
 	"id": "cvolton.misc_bugfixes",
 	"name": "Misc Bugfixes",
 	"developer": "Cvolton",
-	"description": "The 2.2075 before actual 2.2075...",
+	"description": "The 2.2083 before actual 2.2083...",
     "tags": ["bugfix"],
 	"links": {
 		"source": "https://github.com/Cvolton/miscbugfixes-geode"
