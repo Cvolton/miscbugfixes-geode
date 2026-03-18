@@ -57,8 +57,8 @@ $execute {
         //patch CBNZ to B
         auto result = patch(
             0x7091C0,
-            {0xf6, 0x30, 0x00, 0x35},
-            {0x87, 0x01, 0x00, 0x14}
+            {0xb6, 0x32, 0x00, 0x35},
+            {0x95, 0x01, 0x00, 0x14}
         );
     #else
         static_assert(false, "Unsupported platform");
