@@ -1,4 +1,8 @@
 # Changelog
+## <cg>v1.10.1</c> (2026-03-18)
+* <cg>Fixed</c> <cj>Show Hitboxes</c> <co>Mirror Portal</c> fix <cr>not working correctly</c>
+* <cg>Fixed</c> <cj>User ID fix</c> <cr>not working</c> on <cp>Android64</c>
+
 ## <cg>v1.10.0</c> (2026-02-19)
 * <cg>Added</c> <cj>GD 2.208</c> support
 * <cr>Removed</c> bugs <cg>fixed by RobTop</c>
