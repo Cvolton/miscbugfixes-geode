@@ -65,6 +65,30 @@ void cleanUpStaleUpdate() {
     GEODE_ANDROID(removeSubdirIfExists("update", "stale Geode update binaries"));
 }
 
+void cleanUpShouldLoadInvalidMods() {
+    log::info("Cleaning up should-load flags for invalid mods...");
+
+    static constexpr std::string_view shouldLoadPrefix = "should-load-";
+    if(auto geode = Loader::get()->getLoadedMod("geode.loader")) {
+        auto& save = geode->getSaveContainer();
+        std::vector<std::string> toErase;
+        for(auto& [key, _] : save) {
+            if(key.starts_with("should-load-geode_invalid")) {
+                auto modID = key.substr(shouldLoadPrefix.size());
+                if(!Loader::get()->isModInstalled(modID)) {
+                    toErase.push_back(key);
+                }
+            }
+        }
+
+        for (const auto& key : toErase) {
+            save.erase(key);
+        }
+    }
+
+    log::info("Finished cleaning up should-load flags for invalid mods");
+}
+
 $on_mod(Loaded) {
     if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return;
 
@@ -77,5 +101,6 @@ $on_mod(Loaded) {
 
     MenuLayerManager::queueFunction([](MenuLayer *layer) {
         cleanUpUninstalledMods();
+        cleanUpShouldLoadInvalidMods();
     });
 }
