@@ -38,8 +38,8 @@ class $modify(MenuLayer) {
             levelPatch.unwrap()->updateBytes(byteVec);
 
             auto now = asp::Instant::now();
-            GameManager::get()->save();
-            LocalLevelManager::get()->save();
+            GameManager::get()->getCompressedSaveString();
+            LocalLevelManager::get()->getCompressedSaveString();
             log::info("Saving with zlib level {} took {}", idx, now.elapsed());
 
             idx++;
