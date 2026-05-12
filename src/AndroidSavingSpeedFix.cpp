@@ -5,7 +5,7 @@
 using namespace geode::prelude;
 
 
-static auto levelPatch = patch(0xB2A650, {0x01, 0x00, 0x80, 0x12}, {0x01, 0x00, 0x80, 0x52});
+/*static auto levelPatch = patch(0xB2A650, {0x01, 0x00, 0x80, 0x12}, {0x01, 0x00, 0x80, 0x52});
 
 $on_mod(Loaded) {
     if(!levelPatch.isOk()) {
@@ -13,14 +13,14 @@ $on_mod(Loaded) {
     } else {
         log::debug("Patched zlib level to 1 for faster compression");
     }
-}
+}*/
 
 #include <Geode/modify/MenuLayer.hpp>
 class $modify(MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) return false;
 
-        std::vector<ByteVector> bytes = {
+        /*std::vector<ByteVector> bytes = {
             {0x01, 0x00, 0x80, 0x52}, // zlib level 0
             {0x21, 0x00, 0x80, 0x52},  // zlib level 1
             {0x41, 0x00, 0x80, 0x52},  // zlib level 2
@@ -43,6 +43,38 @@ class $modify(MenuLayer) {
             log::info("Saving with zlib level {} took {}", idx, now.elapsed());
 
             idx++;
+        }*/
+
+        static size_t counter = 0;
+
+        auto now = asp::Instant::now();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        GameManager::get()->getSaveString();
+        LocalLevelManager::get()->getSaveString();
+        log::info("Saving with zlib level took {} menulayer {}", now.elapsed(), this);
+
+        counter++;
+
+        if(counter >= 3) {
+            //crash the game
+            (*(void (*)(void))0xB00B1E5)();
         }
 
         return true;
