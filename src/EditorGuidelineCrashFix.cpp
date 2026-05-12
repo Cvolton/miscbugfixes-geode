@@ -2,7 +2,13 @@
 #include <Geode/modify/DrawGridLayer.hpp>
 
 class $modify(DrawGridLayer) {
-    void loadTimeMarkers(gd::string markers) {
+    void loadTimeMarkers(gd::string markersParam) {
+        #ifdef GEODE_IS_ANDROID
+            std::string markers = markersParam;
+        #else
+            std::string& markers = markersParam;
+        #endif
+        
         if (!markers.empty()) {
             auto count = std::count(markers.begin(), markers.end(), '~');
             auto leading = !markers.empty() && markers.back() == '~';
