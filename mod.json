@@ -61,10 +61,5 @@
             "type": "bool",
             "default": false
         }
-	},
-	"api": {
-		"include": [
-			"src/_Utils.hpp"
-		]
 	}
 }
