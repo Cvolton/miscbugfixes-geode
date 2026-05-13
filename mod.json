@@ -47,6 +47,11 @@
             "type": "bool",
             "default": true
         },
+        "practice-music-sync-pulse-fix": {
+            "name": "Fix pulsing objects in Main Levels songs with Practice Music Sync",
+            "type": "bool",
+            "default": true
+        },
         "dash-particles-offset-fix": {
             "name": "Fix dash orb particles being incorrectly offset",
             "type": "bool",
