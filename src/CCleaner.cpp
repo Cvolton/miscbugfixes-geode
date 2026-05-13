@@ -21,6 +21,7 @@ void cleanUpIndexCache() {
 }
 
 void cleanUpUninstalledMods() {
+    asp::Instant start = asp::Instant::now();
     std::error_code ec;
 
     log::info("Cleaning up uninstalled mods...");
@@ -58,7 +59,7 @@ void cleanUpUninstalledMods() {
             log::info("Successfully cleaned up uninstalled mod: {}", modDir.filename());
         }
     }
-    log::info("Finished cleaning up uninstalled mods");
+    log::info("Finished cleaning up uninstalled mods, took {}", start.elapsed());
 }
 
 void cleanUpStaleUpdate() {
@@ -92,15 +93,12 @@ void cleanUpShouldLoadInvalidMods() {
 $on_mod(Loaded) {
     if(Mod::get()->getSettingValue<bool>("skip-ccleaner")) return;
 
-    std::thread([] {
-        thread::setName("CCleaner");
-
-        cleanUpIndexCache();
-        cleanUpStaleUpdate();
-    }).detach();
-
     MenuLayerManager::queueFunction([](MenuLayer *layer) {
-        cleanUpUninstalledMods();
+        async::runtime().spawnBlocking<void>([] {
+            cleanUpIndexCache();
+            cleanUpStaleUpdate();
+            cleanUpUninstalledMods();
+        });
         cleanUpShouldLoadInvalidMods();
     });
 }
