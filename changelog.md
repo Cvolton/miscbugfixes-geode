@@ -1,4 +1,9 @@
 # Changelog
+## <cg>v1.11.0</c> (2026-08-06)
+* <cg>Fixed</c> <cr>Invalid Editor Guidelines Crash</c>
+* <cg>Re-enabled</c> <cl>Practice Music Fix</c> (it's still needed for main level songs)
+* Optimized various parts of the mod
+
 ## <cg>v1.10.1</c> (2026-03-18)
 * <cg>Fixed</c> <cj>Show Hitboxes</c> <co>Mirror Portal</c> fix <cr>not working correctly</c>
 * <cg>Fixed</c> <cj>User ID fix</c> <cr>not working</c> on <cp>Android64</c>
