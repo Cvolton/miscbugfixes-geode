@@ -74,7 +74,7 @@ void cleanUpShouldLoadInvalidMods() {
         auto& save = geode->getSaveContainer();
         std::vector<std::string> toErase;
         for(auto& [key, _] : save) {
-            if(key.starts_with("should-load-geode_invalid")) {
+            if(key.starts_with("should-load-geode_invalid") || key.starts_with("is-pinned-geode_invalid")) {
                 auto modID = key.substr(shouldLoadPrefix.size());
                 if(!Loader::get()->isModInstalled(modID)) {
                     toErase.push_back(key);

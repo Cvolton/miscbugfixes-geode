@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.11.1</c> (2026-09-18)
+* Minor fixes to Automatic File Cleanup
+
 ## <cg>v1.11.0</c> (2026-08-06)
 * <cg>Fixed</c> <cr>Invalid Editor Guidelines Crash</c>
 * <cg>Re-enabled</c> <cl>Practice Music Fix</c> (it's still needed for main level songs)
