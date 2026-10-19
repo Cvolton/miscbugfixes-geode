@@ -6,7 +6,7 @@ using namespace geode::prelude;
 class $modify(LevelBrowserLayer) {
     // Fixes user's list search showing incorrect usernames
     // Also fixes the missing apostrophe in "x's Levels"
-    gd::string getSearchTitle() {
+    std::string getSearchTitle() {
         if(m_searchObject->m_searchType == SearchType::UsersLevels) {
             auto GLM = GameLevelManager::sharedState();
 

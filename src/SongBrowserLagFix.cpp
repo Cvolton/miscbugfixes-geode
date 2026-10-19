@@ -5,6 +5,7 @@
 #include <Geode/modify/CustomSongWidget.hpp>
 #include <Geode/modify/GJSongBrowser.hpp>
 #include <Geode/modify/MenuLayer.hpp>
+#include <asp/fs.hpp>
 
 using namespace geode::prelude;
 
@@ -19,9 +20,13 @@ void populateDownloadedSongsFast() {
 
         std::error_code ec;
         log::debug("Started populating downloaded songs cache");
-        for (const auto & entry : std::filesystem::directory_iterator(songPath, ec)) {
-            if(entry.is_regular_file()) {
-                auto filename = utils::string::pathToString(entry.path().filename());
+        auto res = asp::fs::iterDir(songPath);
+        if(res) for (auto entryRes : res.unwrap()) {
+            if(!entryRes) continue;
+            auto entry = entryRes.unwrap();
+
+            if(entry.isFile()) {
+                auto filename = entry.path.filename().value_or("").string();
                 if(filename.size() > 4 && filename.ends_with(".mp3")) {
                     auto id = utils::numFromString<int>(filename.substr(0, filename.size() - 4));
                     if(id) downloadedSongs[id.unwrap()] = true;
@@ -42,14 +47,15 @@ void resetSongsCache() {
 }
 
 class $modify(BIMusicDownloadManager, MusicDownloadManager) {
-    bool isSongDownloaded(int songID) {
+    //TODO: 2.2091
+    /*bool isSongDownloaded(int songID) {
         if(s_downloadedSongs.contains(songID)) {
             return s_downloadedSongs[songID];
         }
 
         s_downloadedSongs[songID] = MusicDownloadManager::isSongDownloaded(songID);
         return s_downloadedSongs[songID];
-    }
+    }*/
 
     void downloadSong(int songID) {
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs.erase(songID);
@@ -116,13 +122,14 @@ class $modify(CustomSongWidget) {
         CustomSongWidget::updateSongInfo();
     }
 
-    void deleteSong() {
+    //TODO: 2.2091
+    /*void deleteSong() {
         auto id = m_songInfoObject ? m_songInfoObject->m_songID : 0;
 
         CustomSongWidget::deleteSong();
 
         if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
-    }
+    }*/
 };
 
 // the button got deleted in 2.206

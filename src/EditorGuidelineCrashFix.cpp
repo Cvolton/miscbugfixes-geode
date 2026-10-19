@@ -2,7 +2,7 @@
 #include <Geode/modify/DrawGridLayer.hpp>
 
 class $modify(DrawGridLayer) {
-    void loadTimeMarkers(gd::string markersParam) {
+    void loadTimeMarkers(std::string markersParam) {
         #ifdef GEODE_IS_ANDROID
             std::string markers = markersParam;
         #else

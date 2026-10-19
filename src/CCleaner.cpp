@@ -1,15 +1,16 @@
 #include <Geode/Geode.hpp>
+#include <asp/fs.hpp>
 #include "_MenuLayerManager.hpp"
 
 using namespace geode::prelude;
 
 void removeSubdirIfExists(const std::string& subdir, const std::string& friendlyName) {
-    if(std::filesystem::exists(dirs::getGeodeDir() / subdir)) {
+    if(asp::fs::exists(dirs::getGeodeDir() / subdir)) {
         log::info("Cleaning up {}...", friendlyName);
         std::error_code ec;
-        std::filesystem::remove_all(dirs::getGeodeDir() / subdir, ec);
-        if(ec) {
-            log::error("Failed to clean up {}: {}", friendlyName, ec.message());
+        auto res = asp::fs::removeDirAll(dirs::getGeodeDir() / subdir);
+        if(!res) {
+            log::error("Failed to clean up {}: {}", friendlyName, res.unwrapErr());
         } else {
             log::info("Successfully cleaned up {}", friendlyName);
         }
@@ -22,41 +23,31 @@ void cleanUpIndexCache() {
 
 void cleanUpUninstalledMods() {
     asp::Instant start = asp::Instant::now();
-    std::error_code ec;
 
     log::info("Cleaning up uninstalled mods...");
-    for(auto& entry : std::filesystem::directory_iterator(dirs::getModRuntimeDir(), ec)) {
-        if(!std::filesystem::is_directory(entry, ec)) continue;
-
-        auto modDir = entry.path();
+    auto res = asp::fs::iterDir(dirs::getModRuntimeDir());
+    if(res) for(auto entry : res.unwrap()) {
+        if(!entry || !entry.unwrap().isDir()) continue;
+        auto modDir = entry.unwrap().path;
         bool modInstalled = true;
 
         // not a mod if this fails, presumably user data saved on accident
-        if(!(std::filesystem::exists(modDir / "mod.json", ec) || std::filesystem::is_empty(modDir, ec)) || ec) {
-            try {
-                log::warn("Found non-mod directory in mods folder: {}", modDir.filename());
-            } catch(const std::exception& e) {
-                log::error("Failed to log non-mod directory: {}", e.what());
-            }
+        if(!asp::fs::exists(modDir / "mod.json") /*|| std::filesystem::is_empty(modDir, ec)) || ec*/) {
+            //log::warn("Found non-mod directory in mods folder: {}", entry);
             continue;
         }
 
         // this should only have a possibility of throwing an exception on Windows
-        try {
-            modInstalled = ec || Loader::get()->isModInstalled(modDir.filename().string());
-        } catch(const std::exception& e) {
-            log::error("Failed to check if mod is installed: {}", e.what());
-            continue;
-        }
+        modInstalled = Loader::get()->isModInstalled(modDir.filename().value_or("invalid-mod-id"));
 
         if(modInstalled) continue;
-        log::info("Cleaning up uninstalled mod: {}", modDir.filename());
+        //log::info("Cleaning up uninstalled mod: {}", modDir.filename().value_or("invalid-mod-id").string());
         
-        std::filesystem::remove_all(modDir, ec);
-        if(ec) {
-            log::error("Failed to clean up uninstalled mod: {}", ec.message());
+        auto res = asp::fs::removeDirAll(modDir);
+        if(!res) {
+            //log::error("Failed to clean up uninstalled mod {}: {}", modDir.filename().value_or("invalid-mod-id").string(), res.unwrapErr());
         } else {
-            log::info("Successfully cleaned up uninstalled mod: {}", modDir.filename());
+            //log::info("Successfully cleaned up uninstalled mod: {}", modDir.filename().value_or("invalid-mod-id").string());
         }
     }
     log::info("Finished cleaning up uninstalled mods, took {}", start.elapsed());
