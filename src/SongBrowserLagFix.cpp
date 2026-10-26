@@ -47,15 +47,14 @@ void resetSongsCache() {
 }
 
 class $modify(BIMusicDownloadManager, MusicDownloadManager) {
-    //TODO: 2.2091
-    /*bool isSongDownloaded(int songID) {
+    bool isSongDownloaded(int songID) {
         if(s_downloadedSongs.contains(songID)) {
             return s_downloadedSongs[songID];
         }
 
         s_downloadedSongs[songID] = MusicDownloadManager::isSongDownloaded(songID);
         return s_downloadedSongs[songID];
-    }*/
+    }
 
     void downloadSong(int songID) {
         if(s_downloadedSongs.contains(songID)) s_downloadedSongs.erase(songID);
@@ -122,14 +121,13 @@ class $modify(CustomSongWidget) {
         CustomSongWidget::updateSongInfo();
     }
 
-    //TODO: 2.2091
-    /*void deleteSong() {
+    void deleteSong() {
         auto id = m_songInfoObject ? m_songInfoObject->m_songID : 0;
 
         CustomSongWidget::deleteSong();
 
         if(s_downloadedSongs.contains(id)) s_downloadedSongs.erase(id);
-    }*/
+    }
 };
 
 // the button got deleted in 2.206

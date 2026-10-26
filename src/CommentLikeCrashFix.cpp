@@ -1,5 +1,4 @@
-//TODO: 2.2091
-/*#include <Geode/Geode.hpp>
+#include <Geode/Geode.hpp>
 #include <Geode/modify/CommentCell.hpp>
 
 using namespace geode::prelude;
@@ -41,4 +40,4 @@ class $modify(CommentCell) {
         if(m_fields->m_retained) this->release();
         m_fields->m_retained = false;
     }
-};*/
+};
