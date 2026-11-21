@@ -1,5 +1,3 @@
-//TODO: 2.2091
-#if 0
 #include <Geode/Geode.hpp>
 #include "_Utils.hpp"
 
@@ -20,32 +18,32 @@ $execute {
             {0x74, 0x00}
         );
     #elif defined(GEODE_IS_INTEL_MAC)
-        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22091, "Wrong GD version detected");
         //patch JZ to jump by 0 bytes
         auto result = patch(
-            0x55f07c,
+            0x58b720,
             {0x74, 0x1d},
             {0x74, 0x00}
         );
     #elif defined(GEODE_IS_ARM_MAC)
-        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22091, "Wrong GD version detected");
         // NOP out CBZ
         auto result = patch(
-            0x4ae684,
-            {0x15, 0x01, 0x00, 0x34},
+            0x4dc030,
+            {0x16, 0x01, 0x00, 0x34},
             {0x1F, 0x20, 0x03, 0xD5}
         );
     #elif defined(GEODE_IS_IOS)
-        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22091, "Wrong GD version detected");
         if(Loader::get()->isPatchless()) return; // Jitless would crash here
         // NOP out CBZ
         auto result = patch(
-            0xaf238,
+            0xd3fec,
             {0x15, 0x01, 0x00, 0x34},
             {0x1F, 0x20, 0x03, 0xD5}
         );
 
-        GEODE_MOD_STATIC_PATCH(0xaf238, {0x1F, 0x20, 0x03, 0xD5});
+        GEODE_MOD_STATIC_PATCH(0xd3fec, {0x1F, 0x20, 0x03, 0xD5});
     #elif defined(GEODE_IS_ANDROID32)
         static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         // NOP out CBZ
@@ -70,4 +68,3 @@ $execute {
         log::error("Failed to apply user ID fix - {}", result.unwrapErr());
     }
 }
-#endif
