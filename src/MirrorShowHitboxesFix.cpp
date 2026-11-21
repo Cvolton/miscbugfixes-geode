@@ -14,26 +14,6 @@ static bool s_insideDebugUpdate = false;
 // init
 STATIC_BOOL_SETTING(shouldApplyPhysicsFix, practice-mode-show-hitboxes);
 
-// mirrored hitboxes invisible fix
-class $modify(cocos2d::CCDrawNode) {
-    bool drawPolygon(CCPoint *verts, unsigned int count, const ccColor4F &fillColor, float borderWidth, const ccColor4F &borderColor, cocos2d::BorderAlignment alignment) {
-        if(s_insideDebugUpdate) {
-            borderWidth = std::abs(borderWidth);
-        }
-
-        return CCDrawNode::drawPolygon(verts, count, fillColor, borderWidth, borderColor, alignment);
-    }
-
-    bool drawCircle(const cocos2d::CCPoint& position, float radius, const cocos2d::ccColor4F& color, float borderWidth, const cocos2d::ccColor4F& borderColor, unsigned int segments) {
-        if(s_insideDebugUpdate) {
-            borderWidth = std::abs(borderWidth);
-            m_bUseArea = false;
-        }
-
-        return CCDrawNode::drawCircle(position, radius, color, borderWidth, borderColor, segments);
-    }
-};
-
 // slopes physics change fix
 class $modify(GJBaseGameLayer) {
     void updateDebugDraw() {
