@@ -10,10 +10,10 @@ $execute {
     //
     // Patched function: GJGameLevel::encodeWithCoder
     #ifdef GEODE_IS_WINDOWS
-        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22091, "Wrong GD version detected");
         //patch JZ to jump by 0 bytes
         auto result = patch(
-            0x16f58b,
+            0x269EC4,
             {0x74, 0x1e},
             {0x74, 0x00}
         );
@@ -45,10 +45,10 @@ $execute {
 
         GEODE_MOD_STATIC_PATCH(0xd3fec, {0x1F, 0x20, 0x03, 0xD5});
     #elif defined(GEODE_IS_ANDROID32)
-        static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
+        static_assert(GEODE_COMP_GD_VERSION == 22091, "Wrong GD version detected");
         // NOP out CBZ
         auto result = patch(
-            0x3C8136,
+            0x4D8574,
             {0x56, 0xb1},
             {0x00, 0xbf}
         );
@@ -56,9 +56,9 @@ $execute {
         static_assert(GEODE_COMP_GD_VERSION == 22081, "Wrong GD version detected");
         //patch CBNZ to B
         auto result = patch(
-            0x7091C0,
-            {0xb6, 0x32, 0x00, 0x35},
-            {0x95, 0x01, 0x00, 0x14}
+            0x856928,
+            {0x77, 0x53, 0x00, 0x35},
+            {0x9b, 0x02, 0x00, 0x14}
         );
     #else
         static_assert(false, "Unsupported platform");
