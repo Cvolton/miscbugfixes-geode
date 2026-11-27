@@ -3,11 +3,7 @@
 
 class $modify(DrawGridLayer) {
     void loadTimeMarkers(std::string markersParam) {
-        #ifdef GEODE_IS_ANDROID
-            std::string markers = markersParam;
-        #else
-            std::string& markers = markersParam;
-        #endif
+        std::string& markers = markersParam;
         
         if (!markers.empty()) {
             auto count = std::count(markers.begin(), markers.end(), '~');
