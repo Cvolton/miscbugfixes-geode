@@ -37,7 +37,6 @@ void cleanUpUninstalledMods() {
             continue;
         }
 
-        // this should only have a possibility of throwing an exception on Windows
         modInstalled = Loader::get()->isModInstalled(modDir.filename().value_or("invalid-mod-id"));
 
         if(modInstalled) continue;
@@ -45,9 +44,9 @@ void cleanUpUninstalledMods() {
         
         auto res = asp::fs::removeDirAll(modDir);
         if(!res) {
-            //log::error("Failed to clean up uninstalled mod {}: {}", modDir.filename().value_or("invalid-mod-id").string(), res.unwrapErr());
+            log::error("Failed to clean up uninstalled mod {}: {}", modDir.filename().value_or("invalid-mod-id").string(), res.unwrapErr());
         } else {
-            //log::info("Successfully cleaned up uninstalled mod: {}", modDir.filename().value_or("invalid-mod-id").string());
+            log::info("Successfully cleaned up uninstalled mod: {}", modDir.filename().value_or("invalid-mod-id").string());
         }
     }
     log::info("Finished cleaning up uninstalled mods, took {}", start.elapsed());
@@ -62,7 +61,7 @@ void cleanUpShouldLoadInvalidMods() {
 
     static constexpr std::string_view shouldLoadPrefix = "should-load-";
     if(auto geode = Loader::get()->getLoadedMod("geode.loader")) {
-        auto& save = geode->getSaveContainer();
+        auto& save = geode->getSaveContainerConst();
         std::vector<std::string> toErase;
         for(auto& [key, _] : save) {
             if(key.starts_with("should-load-geode_invalid") || key.starts_with("is-pinned-geode_invalid")) {
@@ -73,9 +72,16 @@ void cleanUpShouldLoadInvalidMods() {
             }
         }
 
-        for (const auto& key : toErase) {
-            save.erase(key);
+        if(!toErase.empty()) {
+            auto& save = geode->getSaveContainer();
+
+            for (const auto& key : toErase) {
+                save.erase(key);
+            }
+            
+            (void) geode->saveData();
         }
+
     }
 
     log::info("Finished cleaning up should-load flags for invalid mods");
