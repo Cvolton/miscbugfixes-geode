@@ -59,6 +59,17 @@ namespace MiscBugfixes {
         if(hasBeenCalled) return;
         hasBeenCalled = true;
 
+        if(Mod::get()->getSavedValue("first-run", true)) {
+            Mod::get()->setSavedValue("first-run", false);
+            log::info("First run of Misc Bugfixes detected, skipping important notices");
+            return;
+        }
+
+        if(Mod::get()->getSettingValue<bool>("disable-network")) {
+            log::info("Network requests are disabled, skipping important notices");
+            return;
+        }
+
         auto url = fmt::format("https://geometrydash.eu/mods/miscbugfixes/_api/importantNotices/?platform={}&version={}&loader={}&wine={}&os={}&amazon={}", GEODE_PLATFORM_NAME, Mod::get()->getVersion().toVString(true), Loader::get()->getVersion().toVString(true), getWineVersion(), getOSVersion(), (MiscBugfixes::isAmazon() || Loader::get()->isPatchless()) ? "1" : "0");
         log::info("Fetching important notices from: {}", url);
         async::spawn(

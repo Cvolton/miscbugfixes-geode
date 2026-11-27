@@ -33,3 +33,8 @@ For a technical breakdown of the fixed bugs see [readme.md](https://github.com/C
 - Erymanthus: Contributed Mirror Mode Start Pos and Mini Swing Cube fixes
 - ConfiG: Contributed Dash Orb Particles, Robot Head, Music Pulse and Show Trigger Wave Particles fixes
 - Hbg1010: Contributed the Font Selection Highlight fix
+
+## Privacy
+This mod requests additional information from geometrydash.eu on every launch (excluding the first one after installation). During this, your IP address and basic version and platform information are transmitted. Nothing that identifies your Geometry Dash account is sent. See the [privacy policy](https://geometrydash.eu/mods/miscbugfixes/privacy/) for more information.
+
+You can disable this feature in the mod settings.
