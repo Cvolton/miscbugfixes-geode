@@ -1,5 +1,5 @@
 # Misc Bugfixes
-The 2.2083 before actual 2.2083...
+The 2.21 before the actual 2.21...
 
 ## Fixed bugs:
 ### Practice Mode (optional)
