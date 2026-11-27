@@ -1,4 +1,13 @@
 # Changelog
+## <cg>v1.12.0</c> (2026-11-28)
+* <cg>Added</c> <cj>GD 2.2091</c> support
+* <cr>Removed</c> bugs <cg>fixed by RobTop</c>
+  - <cr>"12 days left"</c> timer bug
+  - <cj>Wave trail</c> <cr>teleporting</c> when <co>player 2</c> enters a single portal
+  - <cj>Mirror Mode</c> not working in <co>Start Positions</c>
+  - <cj>Show Hitboxes</c> not working with <co>mirror portals</c>
+* Optimized various parts of the mod
+
 ## <cg>v1.11.1</c> (2026-09-18)
 * Minor fixes to Automatic File Cleanup
 
@@ -12,7 +21,7 @@
 * <cg>Fixed</c> <cj>User ID fix</c> <cr>not working</c> on <cp>Android64</c>
 
 ## <cg>v1.10.0</c> (2026-02-19)
-* <cg>Added</c> <cj>GD 2.208</c> support
+* <cg>Added</c> <cj>GD 2.2081</c> support
 * <cr>Removed</c> bugs <cg>fixed by RobTop</c>
   - <cj>Music Pulse</c> not working in <co>Practice Mode</c> with Music Unlocker
   - <cj>Copy to Clipboard</c> not working (mobile only)
